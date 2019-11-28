@@ -182,6 +182,14 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
         navigationController?.present(alert, animated: true, completion: nil)
     }
 
+    private func getNowDateString() -> String {
+        let date = Date()
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        let strNowTime = timeFormatter.string(from: date as Date) as String
+        return strNowTime
+    }
+    
     // MARK: - 事件处理
     
     @objc func editBtnClick() {
@@ -202,30 +210,55 @@ class ProtocolExcuteVC: BaseViewController, UICollectionViewDataSource, UICollec
         // 默认0
         proto.returnCount = Int(countStr) ?? 1
         
-        printLog("发送：" + (runner.getCmdData(pcl: proto)?.hexEncodedString() ?? ""))
+        let dateString = self.getNowDateString()
+        
+        printLog(dateString + "发送：" + (runner.getCmdData(pcl: proto)?.hexEncodedString() ?? ""))
         
         weak var weakSelf = self
         
         excuteBtn.isEnabled = false
         
         runner.run(proto, boolCallback: { (bool) in
-            let str = bool ? "成功" : "失败"
+            
+            let dateString = self.getNowDateString()
+            let success = bool ? "成功" : "失败"
+            let str = dateString + success
+            
             weakSelf?.resultStr = str
             weakSelf?.excuteFinish(resultStr: str)
         }, stringCallback: { (str) in
-            let result = "返回：" + str
+            
+            let dateString = self.getNowDateString()
+            
+            let result = dateString + "返回：" + str
             weakSelf?.resultStr = str
             weakSelf?.excuteFinish(resultStr: result)
         }, dictCallback: { (dict) in
+            
+            let dateString = self.getNowDateString()
+            
             let str = weakSelf?.getJSONStringFromDictionary(dictionary: dict)
             weakSelf?.resultStr = str
-            weakSelf?.excuteFinish(resultStr: "返回：\(str ?? "")")
+            
+            let result = dateString + "返回：\(str ?? "")"
+            
+            weakSelf?.excuteFinish(resultStr: result)
         }, dictArrayCallback: { (dictArr) in
-            let result = weakSelf?.getJSONStringFromArray(array: dictArr)
-            weakSelf?.resultStr = result
-            weakSelf?.excuteFinish(resultStr: "返回：\(result ?? "")")
+            
+            let dateString = self.getNowDateString()
+
+            let str = weakSelf?.getJSONStringFromArray(array: dictArr)
+            weakSelf?.resultStr = str
+            
+            let result = dateString + "返回：\(str ?? "")"
+
+            weakSelf?.excuteFinish(resultStr: result)
         }) { (error) in
-            weakSelf?.excuteFinish(resultStr: "错误：" + (weakSelf?.errorMsgFromBleError(error) ?? ""))
+            
+            let dateString = self.getNowDateString()
+            let result = dateString + (weakSelf?.errorMsgFromBleError(error) ?? "")
+
+            weakSelf?.excuteFinish(resultStr: "错误：" + result)
         }
         
     }

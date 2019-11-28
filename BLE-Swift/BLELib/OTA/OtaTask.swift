@@ -28,7 +28,14 @@ public class OtaTask: NSObject {
     
     var device: BLEDevice
     var otaBleName: String
-    var otaDatas: [OtaDataModel]
+    var otaDatas: [OtaDataModel] {
+        willSet {
+            
+        }
+        didSet {
+             print("\(otaDatas)");
+        }
+    }
     var readyCallback: EmptyBlock?
     var progressCallback: FloatCallback?
     var finishCallback: BoolCallback?

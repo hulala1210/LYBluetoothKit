@@ -1,5 +1,20 @@
 [
     {
+        "deviceName" : "3Plus客户L42A+",
+        "bleName" : "Vibe+ #",
+        "prefix" : "Vibe+"
+    },
+    {
+        "deviceName" : "3Plus客户S21",
+        "bleName" : "S21",
+        "prefix" : "S21#"
+    },
+    {
+        "deviceName" : "3Plus客户X11",
+        "bleName" : "YoWatch#",
+        "prefix" : "X11"
+    },
+    {
         "deviceName" : "TITAN客户P01ATN",
         "bleName" : "P01B_TITAN",
         "prefix" : "P01B"

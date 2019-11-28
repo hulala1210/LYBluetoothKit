@@ -223,9 +223,15 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        var otaBleName = config.prefix + config.deviceName.suffix(5)
-        if config.prefix.count == 0 || device.isApollo3 || config.platform == .tlsr {
-            otaBleName = device.name
+        var otaBleName: String!
+        if ((config.otaBleName) != nil && config.otaBleName!.count > 0) {
+            otaBleName = config.otaBleName
+        }
+        else {
+            otaBleName = config.prefix + config.deviceName.suffix(5)
+            if config.prefix.count == 0 || device.isApollo3 || config.platform == .tlsr {
+                otaBleName = device.name
+            }
         }
         
         switch config.platform {

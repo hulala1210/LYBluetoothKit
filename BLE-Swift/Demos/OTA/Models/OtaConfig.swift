@@ -31,7 +31,7 @@ struct OtaConfig: Codable {
     var otaCount = 0
     var needReset = false
     var firmwares: [Firmware] = []
-    
+    var otaBleName: String?
     
     func getFirmwares(byType type: OtaDataType) -> [Firmware] {
         var arr = [Firmware]()

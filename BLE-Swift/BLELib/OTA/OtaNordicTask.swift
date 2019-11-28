@@ -129,16 +129,22 @@ class OtaNordicTask: OtaTask {
     private func sendTypeData() {
         addTimer(timeout: timeout, action: 2)
         
-        let dm = otaDatas[0]
+        if otaDatas.count > 0 {
+            let dm = otaDatas[0]
+            
+            // 发送类型数据
+            writeDatData(dm.typeData)
+            
+            var data = Data(bytes: [0x00, 0x00, 0x00, 0x00,
+                                    0x00, 0x00, 0x00, 0x00])
+            var length = dm.otaData.count
+            data.append(bytes: &length, count: 4)
+            writeBinData(data)
+        }
+        else {
+            print("出问题了？")
+        }
         
-        // 发送类型数据
-        writeDatData(dm.typeData)
-        
-        var data = Data(bytes: [0x00, 0x00, 0x00, 0x00,
-                                0x00, 0x00, 0x00, 0x00])
-        var length = dm.otaData.count
-        data.append(bytes: &length, count: 4)
-        writeBinData(data)
     }
     
     private func sendInitData() {
@@ -213,7 +219,7 @@ class OtaNordicTask: OtaTask {
         if checkIsCancel() {
             return
         }
-//        print("写数据BinData(\(line))：\(data.hexEncodedString())")
+        print("写数据BinData(\(line))：\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.nordicOtaBin)
         line += 1;
     }
@@ -222,9 +228,27 @@ class OtaNordicTask: OtaTask {
         if checkIsCancel() {
             return
         }
-//        print("写数据DatData：\(data.hexEncodedString())")
+        print("写数据DatData：\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.nordicOtaBat)
         
+    }
+    
+    override func deviceDataUpdate(notification: Notification?) {
+        //        print("deviceUpdate: \(String(describing: notification?.userInfo))")
+        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
+            return
+        }
+
+        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, (uuid == UUID.otaNotifyC || uuid == UUID.nordicOtaBat) else {
+            // 00001531-1212-EFDE-1523-785FEABCD123
+            
+            return
+        }
+
+        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 2 else {
+            return
+        }
+        deviceDidUpdateData(data: data, deviceName: de.name, uuid: uuid)
     }
     
     // MARK: - 接收数据

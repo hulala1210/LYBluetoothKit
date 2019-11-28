@@ -16,6 +16,10 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var platformSeg: UISegmentedControl!
     @IBOutlet weak var prefixTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var customOTANameSwitch: UISwitch!
+    @IBOutlet weak var customOTANameTextField: UITextField!
+    @IBOutlet weak var prefixSelectBtn: UIButton!
+    @IBOutlet weak var prefixSelectionBgViewHeightConstraint: NSLayoutConstraint!
     
     var firmwareStrs: [String] = ["", "", "", "", ""]
     var config = OtaConfig()
@@ -86,6 +90,27 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
     // MARK: - 业务逻辑
 
     // MARK: - 事件处理
+    @IBAction func switchAction(_ sender: UISwitch) {
+        prefixTextField.isUserInteractionEnabled = !sender.isOn
+        prefixSelectBtn.isEnabled = !sender.isOn;
+        customOTANameTextField.isUserInteractionEnabled = sender.isOn;
+        
+        UIView.animate(withDuration: 0.25) {
+            if sender.isOn {
+                self.prefixSelectionBgViewHeightConstraint.constant = 0
+                self.tableView.tableHeaderView?.height = 229 - 72
+            }
+            else {
+                self.prefixSelectionBgViewHeightConstraint.constant = 72
+                self.tableView.tableHeaderView?.height = 229
+            }
+            
+            self.tableView.tableHeaderView?.layoutIfNeeded()
+            self.tableView.reloadSection(0, with: UITableView.RowAnimation.automatic)
+        }
+        
+    }
+    
     @IBAction func platformChangedAction(_ sender: Any) {
         config.platform = OtaPlatform(rawValue: platformSeg.selectedSegmentIndex)!
         tableView.reloadData()
@@ -108,12 +133,19 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
         
-        
-        if !device.isApollo3 && prefixTextField.text?.count == 0 && config.platform != .tlsr {
-            showError(TR("The connected device is not kind of Apollo3, please input OTA prefix"))
-            return
+         if customOTANameSwitch.isOn {
+            if customOTANameTextField.text?.count == 0 {
+                showError("请输入OTA名称")
+                return
+            }
         }
-        
+        else {
+            if !device.isApollo3 && prefixTextField.text?.count == 0 && config.platform != .tlsr {
+                showError(TR("The connected device is not kind of Apollo3, please input OTA prefix"))
+                return
+            }
+        }
+                
         if config.firmwares.count == 0 {
             showError(TR("Please select firmwares"))
             return
@@ -121,6 +153,13 @@ class OtaConfigVC: BaseViewController, UITableViewDataSource, UITableViewDelegat
         
         config.prefix = prefixTextField.text ?? ""
         config.deviceName = device.name
+        
+        if customOTANameSwitch.isOn {
+            config.otaBleName = customOTANameTextField.text
+        }
+        else {
+            config.otaBleName = nil
+        }
         
         let vc = SDOtaVC()
         vc.config = config

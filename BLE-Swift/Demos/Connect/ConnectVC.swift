@@ -178,11 +178,16 @@ class ConnectVC: BaseTableViewController, LeftDeviceCellDelegate, UISearchBarDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! LeftDeviceCell
-        let device = self.filteredDevices[indexPath.row]
-        cell.updateUI(withDevice: device)
-        cell.delegate = self;
-        cell.setDebugHidden(hidden: true)
-        cell.accessoryType = .disclosureIndicator
+        
+        // 可能filteredDevice有在异步线程中改变，会导致这里越界访问崩溃，所以加上这个判断
+        if self.filteredDevices.count > indexPath.row {
+            let device = self.filteredDevices[indexPath.row]
+            cell.updateUI(withDevice: device)
+            cell.delegate = self;
+            cell.setDebugHidden(hidden: true)
+            cell.accessoryType = .disclosureIndicator
+        }
+        
         return cell
     }
     

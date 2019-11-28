@@ -37,7 +37,9 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
     
     @IBOutlet weak var speedTF: UITextField!
     
+    @IBOutlet weak var prefixSelectBtn: UIButton!
     
+    @IBOutlet weak var customOTANameSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,21 +60,21 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
         lbl2.font = font(14)
         prefixTF.leftView = lbl2
         
-        let selBtn = UIButton(type: .custom)
-        selBtn.frame = CGRect(x: 0, y: 0, width: 60, height: bleNameTF.height)
-        selBtn.backgroundColor = kMainColor
-        selBtn.setTitle(TR("选择"), for: .normal)
-        selBtn.addTarget(self, action: #selector(selBtnClick), for: .touchUpInside)
-        selBtn.titleLabel?.font = font(14)
-        bleNameTF.rightView = selBtn
-        
-        let selBtn2 = UIButton(type: .custom)
-        selBtn2.frame = CGRect(x: 0, y: 0, width: 60, height: prefixTF.height)
-        selBtn2.backgroundColor = kMainColor
-        selBtn2.setTitle(TR("选择"), for: .normal)
-        selBtn2.addTarget(self, action: #selector(selBtnClick), for: .touchUpInside)
-        selBtn2.titleLabel?.font = font(14)
-        prefixTF.rightView = selBtn2
+//        let selBtn = UIButton(type: .custom)
+//        selBtn.frame = CGRect(x: 0, y: 0, width: 60, height: bleNameTF.height)
+//        selBtn.backgroundColor = kMainColor
+//        selBtn.setTitle(TR("选择"), for: .normal)
+//        selBtn.addTarget(self, action: #selector(selBtnClick), for: .touchUpInside)
+//        selBtn.titleLabel?.font = font(14)
+//        bleNameTF.rightView = selBtn
+//
+//        let selBtn2 = UIButton(type: .custom)
+//        selBtn2.frame = CGRect(x: 0, y: 0, width: 60, height: prefixTF.height)
+//        selBtn2.backgroundColor = kMainColor
+//        selBtn2.setTitle(TR("选择"), for: .normal)
+//        selBtn2.addTarget(self, action: #selector(selBtnClick), for: .touchUpInside)
+//        selBtn2.titleLabel?.font = font(14)
+//        prefixTF.rightView = selBtn2
         
 
         apolloRadio.otherButtons = [nordicRadio, tlsrRadio]
@@ -99,10 +101,20 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
             return
         }
         
-        guard let prefixStr = prefixTF.text, prefixStr.count > 0 else {
-            showError(TR("请输入OTA名称前缀"))
-            return
+        let prefixStr = prefixTF.text
+        if customOTANameSwitch.isOn {
+            guard let prefix = prefixStr, prefix.count > 0 else {
+                showError(TR("请输入自定OTA名称"))
+                return
+            }
         }
+        else {
+            guard let prefix = prefixStr, prefix.count > 0 else {
+                showError(TR("请输入OTA名称前缀"))
+                return
+            }
+        }
+        
         
         guard let mtuStr = speedTF.text, mtuStr.count > 0 else {
             showError("请输入正确的MTU值，不能小于20，而且是2的倍数")
@@ -114,7 +126,14 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
         
         var config = OtaConfig()
         config.deviceNamePrefix = bleName
-        config.prefix = prefixStr
+        
+        if customOTANameSwitch.isOn {
+            config.otaBleName = prefixStr
+        }
+        else {
+            config.prefix = prefixStr!
+        }
+        
         config.needReset = needResetSw.isOn
         
         if apolloRadio.isSelected {
@@ -134,7 +153,7 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
     }
 
     @IBAction func signalChanged(_ sender: UISlider) {
-        signalLbl.text = "最小信号强度：\(-Int(sender.value))"
+        signalLbl.text = "最小信号强度: \(-Int(sender.value))"
     }
     
     @IBAction func upgradeCountChanged(_ sender: UISlider) {
@@ -142,13 +161,26 @@ class ZdOtaConfigVC: BaseViewController, PrefixSelectVCDelegate {
     }
     
     @IBAction func resetSwValueChanged(_ sender: UISwitch) {
+        
     }
     
     
-    @objc func selBtnClick() {
+    @IBAction func selBtnClick() {
         let vc = PrefixSelectVC()
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func useCustomOTANameSwitchAction(_ sender: UISwitch) {
+        let titleLabel:UILabel = prefixTF!.leftView as! UILabel
+        
+        if sender.isOn {
+            titleLabel.text = "  自定OTA名称: "
+        }
+        else {
+            titleLabel.text = "  OTA名称前缀: "
+            
+        }
     }
     
     @IBAction func normalSpeedValueChanged(_ sender: Any) {

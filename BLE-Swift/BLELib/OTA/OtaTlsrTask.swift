@@ -69,7 +69,9 @@ class OtaTlsrTask: OtaTask {
         {
             if dataModel.tlsrOtaDataIndex + i == dataModel.tlsrOtaDataPackages.count - 1 {
                 isSingleOTAFinish = true
-                endOta()
+                
+                readData()
+                
                 // 进度回调
                 sendLength = totalLength
                 DispatchQueue.main.async {
@@ -80,6 +82,7 @@ class OtaTlsrTask: OtaTask {
             }
             
             let sd = dataModel.tlsrOtaDataPackages[dataModel.tlsrOtaDataIndex + i]
+            
             writeData(data: sd)
             
             // 进度回调
@@ -96,6 +99,7 @@ class OtaTlsrTask: OtaTask {
         dataModel.tlsrOtaDataIndex += onceSendCount
         
         addTimer(timeout: 10, action: 2)
+        print("Will readData Check CRC")
         readData()
     }
     
@@ -111,7 +115,7 @@ class OtaTlsrTask: OtaTask {
         if checkIsCancel() {
             return
         }
-//        print("发送数据：\(data.hexEncodedString())")
+        print("发送数据：\(data.hexEncodedString())")
         _ = self.device.write(data, characteristicUUID: UUID.tlsrOtaUuid)
     }
     
@@ -122,6 +126,20 @@ class OtaTlsrTask: OtaTask {
         _ = self.device.read(characteristicUUID: UUID.tlsrOtaUuid)
     }
     
+    override func deviceDataUpdate(notification: Notification?) {
+        guard let de = notification?.userInfo?[BLEKey.device] as? BLEDevice, de == self.device else {
+            return
+        }
+
+        guard let uuid = notification?.userInfo?[BLEKey.uuid] as? String, (uuid == UUID.c8002 || uuid == UUID.tlsrOtaUuid) else {
+            return
+        }
+
+        guard let data = notification?.userInfo?[BLEKey.data] as? Data, data.count >= 1 else {
+            return
+        }
+        deviceDidUpdateData(data: data, deviceName: de.name, uuid: uuid)
+    }
     
     // MARK: - 接收数据
     override func deviceDidUpdateData(data: Data, deviceName: String, uuid: String) {
@@ -131,8 +149,11 @@ class OtaTlsrTask: OtaTask {
             return
         }
         
-        if !self.isSingleOTAFinish {
+        if !self.isSingleOTAFinish && otaDatas.count > 0 {
             startSendOtaData(dataModel: otaDatas[0])
+        }
+        else {
+            endOta();
         }
     }
     

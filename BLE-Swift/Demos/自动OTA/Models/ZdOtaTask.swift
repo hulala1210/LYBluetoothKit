@@ -89,36 +89,96 @@ class ZdOtaTask: Equatable {
         }
         
         weak var weakSelf = self
-        otaTask = OtaManager.shared.startOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
-            NotificationCenter.default.post(name: kZdOtaTaskReady, object: nil, userInfo: nil)
-        }, progressCallback: { (progress) in
-            
+        
+        let readyBlock = { NotificationCenter.default.post(name: kZdOtaTaskReady, object: nil, userInfo: nil) }
+        
+        let progressBlock = {(progress:Float) -> Void in
             weakSelf?.progressCallback?(progress)
             
             NotificationCenter.default.post(name: kZdOtaTaskProgressUpdate, object: nil, userInfo: ["progress": progress, "task": self])
-        }, finishCallback: { (bool, error) in
-            
+        }
+        
+        let finishBlock = {(bool: Bool, error: BLEError?) in
             if error != nil {
-                weakSelf?.state = .fail
-                weakSelf?.error = error
-                weakSelf?.endTime = Date().timeIntervalSince1970
-                
-                weakSelf?.finishCallback?(bool, error)
-                
-                NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
-            } else {
-                if let bool = weakSelf?.config.needReset, bool == true {
-                    weakSelf?.startResetDevice()
-                } else {
-                    weakSelf?.otaSuccess(isReset: false)
-                }
-//                if self.config.needReset {
-//                    self.startResetDevice()
+                            weakSelf?.state = .fail
+                            weakSelf?.error = error
+                            weakSelf?.endTime = Date().timeIntervalSince1970
+                            
+                            weakSelf?.finishCallback?(bool, error)
+                            
+                            NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
+                        } else {
+                            if let bool = weakSelf?.config.needReset, bool == true {
+                                weakSelf?.startResetDevice()
+                            } else {
+                                weakSelf?.otaSuccess(isReset: false)
+                            }
+            //                if self.config.needReset {
+            //                    self.startResetDevice()
+            //                } else {
+            //                    self.otaSuccess()
+            //                }
+                        }
+        }
+        
+        
+        switch config.platform {
+        case .apollo:
+            otaTask = OtaManager.shared.startOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
+                readyBlock()
+            }, progressCallback: { (progress) in
+                progressBlock(progress)
+            }, finishCallback: { (bool, error) in
+                finishBlock(bool, error)
+            })
+        case .nordic:
+            otaTask = OtaManager.shared.startNordicOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
+                readyBlock()
+            }, progressCallback: { (progress) in
+                progressBlock(progress)
+            }, finishCallback: { (bool, error) in
+                finishBlock(bool, error)
+            })
+        case .tlsr:
+            otaTask = OtaManager.shared.startTlsrOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
+                readyBlock()
+            }, progressCallback: { (progress) in
+                progressBlock(progress)
+            }, finishCallback: { (bool, error) in
+                finishBlock(bool, error)
+            })
+        }
+        
+//        otaTask = OtaManager.shared.startOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
+//            NotificationCenter.default.post(name: kZdOtaTaskReady, object: nil, userInfo: nil)
+//        }, progressCallback: { (progress) in
+//
+//            weakSelf?.progressCallback?(progress)
+//
+//            NotificationCenter.default.post(name: kZdOtaTaskProgressUpdate, object: nil, userInfo: ["progress": progress, "task": self])
+//        }, finishCallback: { (bool, error) in
+//
+//            if error != nil {
+//                weakSelf?.state = .fail
+//                weakSelf?.error = error
+//                weakSelf?.endTime = Date().timeIntervalSince1970
+//
+//                weakSelf?.finishCallback?(bool, error)
+//
+//                NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
+//            } else {
+//                if let bool = weakSelf?.config.needReset, bool == true {
+//                    weakSelf?.startResetDevice()
 //                } else {
-//                    self.otaSuccess()
+//                    weakSelf?.otaSuccess(isReset: false)
 //                }
-            }
-        })
+////                if self.config.needReset {
+////                    self.startResetDevice()
+////                } else {
+////                    self.otaSuccess()
+////                }
+//            }
+//        })
         otaTask!.config = config
     }
     

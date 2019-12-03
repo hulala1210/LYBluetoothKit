@@ -266,6 +266,7 @@
 		2BEDD8C82264274E001E0509 /* AddProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD8C62264274E001E0509 /* AddProtocolVC.swift */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
+		E22E9A8C239117A700A151C2 /* BLECenterUtilExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -572,6 +573,7 @@
 		8A5DE497842DC3B0E35F73E2 /* Pods_BLE_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC6235056F957FE37653119 /* Pods-BLE-SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftTests/Pods-BLE-SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		9BFEBD92D7DAADC7E15C65D6 /* Pods-BLE-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftUITests/Pods-BLE-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterUtilExtension.swift; sourceTree = "<group>"; };
 		EB1BF05F632A1B4FC85B5AEE /* Pods-BLE-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1548,6 +1550,7 @@
 				2BEC5D6F2174870100E0902B /* BLECenterDeviceExtension.swift */,
 				2B36578321DC9D100070E7AB /* apis_devices.plist */,
 				2B57031E224867C10008208E /* BLECenterSportExtension.swift */,
+				E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1927,6 +1930,7 @@
 				2B40433A216C9AF100C6837B /* BLEDevicesManager.swift in Sources */,
 				2B36579C21DCC6330070E7AB /* SettingsViewController.swift in Sources */,
 				2BA3B58721FC35340084E291 /* ProtocolExcuteVC.swift in Sources */,
+				E22E9A8C239117A700A151C2 /* BLECenterUtilExtension.swift in Sources */,
 				2B5832F02176E46C00259593 /* DevicesVC.swift in Sources */,
 				2B5832F6217705D400259593 /* TableSection.swift in Sources */,
 				2BA23F9E21E4B05700EF1B77 /* FirmwareSaveVC.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum SportType: Int, Codable {
+public enum SportType: UInt, Codable {
     case other = 0
     case walk
     case run

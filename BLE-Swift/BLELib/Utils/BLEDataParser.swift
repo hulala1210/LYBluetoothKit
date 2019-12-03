@@ -16,7 +16,7 @@ class BLEDataParser: NSObject {
 
     var tmpData = Data()
     var tmpDataArr = Array<Data>()
-    var recvLength = 0
+    var recvLength: UInt16 = 0
     weak var delegate: BLEDataParserProtocol?
     
     func clear() {
@@ -42,7 +42,9 @@ class BLEDataParser: NSObject {
                 if (recvBytes[2] == 0x80 || recvBytes[2] == 0x81) && recvBytes.count >= 6 {
                     
                     // 查询指令，接下来两位是数据长度
-                    recvLength = Int(recvBytes[3]) + Int(recvBytes[4] << 8)
+//                    recvLength = Int16(recvBytes[3]) + Int16(recvBytes[4] << 8)
+                    recvLength = data[3...4].uint16
+
                     tmpData = data.subdata(in: 5..<data.count)
                     
                 } else {

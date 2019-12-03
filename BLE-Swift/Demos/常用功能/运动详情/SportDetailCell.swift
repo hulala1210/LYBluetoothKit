@@ -38,7 +38,7 @@ class SportDetailCell: UITableViewCell {
         bpmLbl.text = "心率：\(sport.avgBpm)"
         
         let types: [String] = ["unknown", "walk", "run", "situp", "swin", "ride", "climb stairs", "climb mountain", "stand", "sit"]
-        typeLbl.text = "类型：" + types[sport.type.rawValue]
+        typeLbl.text = "类型：" + types[Int(sport.type.rawValue)]
     }
     
     override func awakeFromNib() {

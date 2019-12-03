@@ -14,7 +14,7 @@ class SportVC: BaseViewController {
     
     @IBOutlet weak var numLbl: UILabel!
     
-    var num: UInt = 0
+    var num: UInt16 = 0
     var sports: Array<Sport>?
     
     override func viewDidLoad() {

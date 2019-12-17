@@ -22,7 +22,7 @@ public enum OtaTaskState: Int, Codable {
     case finish
 }
 
-public class OtaTask: NSObject {
+public class OtaTask: NSObject, BLEDeviceDelegate {
     
     let timeout: TimeInterval = 30
     
@@ -75,7 +75,7 @@ public class OtaTask: NSObject {
         self.finishCallback = finishCallback
         
         super.init()
-//        self.device.delegate = self
+        self.device.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate(notification:)), name: BLEInnerNotification.deviceDataUpdate, object: nil)
     }

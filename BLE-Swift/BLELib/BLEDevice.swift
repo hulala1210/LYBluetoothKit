@@ -99,9 +99,7 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     }
     
     public func write(_ data:Data, characteristicUUID:String) -> Bool {
-        
-//        print("发送数据（\(characteristicUUID)）：\(data.hexEncodedString())")
-        
+
         if peripheral.state != .connected {
             return false
         }
@@ -145,13 +143,15 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
         let lengthTimes = data.count / mtu;
         
         for i in 0..<lengthTimes {
-            let subData = data.subdata(in: i * mtu ..< (i + 1) * mtu);
+            let subData = data.subdata(in: i * mtu ..< (i + 1) * mtu)
+            print("发送数据（\(characteristic.uuid.uuidString)）：\(data.hexEncodedString())")
             self.peripheral.writeValue(subData, for: characteristic, type: type)
 //            print("\(self.name)(\(characteristic.uuid.uuidString)) write: \(subData.hexEncodedString())")
         }
         
         if lengthLeft > 0 {
             let subData = data.subdata(in: lengthTimes * mtu ..< lengthTimes * mtu + lengthLeft)
+            print("发送数据（\(characteristic.uuid.uuidString)）：\(data.hexEncodedString())")
             self.peripheral.writeValue(subData, for: characteristic, type: type)
 //            print("\(self.name)(\(characteristic.uuid.uuidString)) write: \(subData.hexEncodedString())")
         }
@@ -232,7 +232,10 @@ public class BLEDevice: NSObject, CBPeripheralDelegate {
     
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         // 不处理事情
-        
+        if (error != nil) {
+            print("didWriteValueForCharacteristicFailed:" + error!.localizedDescription)
+        }
+        print("didWriteValueForCharacteristic:" + characteristic.uuid.uuidString)
     }
     
     public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {

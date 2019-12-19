@@ -239,6 +239,7 @@ public class BLEScanTask: BLETask {
     
     override func start() {
         super.start()
+        
         parser.clear()
         
         data.state = .sending
@@ -262,14 +263,36 @@ public class BLEScanTask: BLETask {
             return
         }
         
-        if !sendDevice.write(data.sendData, characteristicUUID: data.sendToUuid!) {
+        if data.sendData == Data(bytes: [0x6f,0x01,0x81,0x02,0x00,0xd9,0x00,0x8f]) {
+            print("get 将要写入");
+        }
+        
+        let canWrite = sendDevice.write(data.sendData, characteristicUUID: data.sendToUuid!)
+        
+        if !canWrite {
             data.error = BLEError.deviceError(reason: .disconnected)
             data.state = .sendFailed
         } else {
-            if BLEConfig.shared.shouldSend03End {
+            if BLEConfig.shared.shouldSend03End && data.recvFromUuid != nil {
                 _ = sendDevice.write(Data(bytes: [0x03]), characteristicUUID: data.recvFromUuid!)
             }
-            data.state = .sent
+            
+            if self.data.type == BLEDataType.response {
+                data.state = .recved
+            }
+            else {
+                data.state = .sent
+            }
+        }
+    }
+    
+    override func startTimer() {
+        // 回复设备主动发来的请求没有超时
+        if self.data.type == BLEDataType.response {
+            return
+        }
+        else {
+            super.startTimer();
         }
     }
     

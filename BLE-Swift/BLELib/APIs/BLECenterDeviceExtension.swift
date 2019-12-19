@@ -53,4 +53,31 @@ extension BLECenter {
         return send(data: data, boolCallback: boolCallback, toDeviceName: deviceName)
     }
     
+    public func responseToHeatbeat(boolCallback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
+        let data = Data(bytes: [0x6f,0x01,0x81,0x02,0x00,0xd9,0x00,0x8f])
+        let bleData = BLEData.init(sendData: data, type: BLEDataType.response)
+        return send(data: bleData, callback: { (recv, err) in
+            if err != nil {
+                boolCallback?(false, err)
+            } else {
+                var bool = false
+                var err: BLEError? = nil
+                if let recvData = recv as? BLEData, let bytes = recvData.recvData?.bytes {
+                    
+                    let cmd = recvData.sendData.bytes[1]
+                    let code = recvData.sendData.bytes[2]
+                    
+                    if bytes.count == 2 &&
+                        (code == bytes[0] || cmd == bytes[0]) {
+                        bool = (bytes[1] == 0)
+                    } else {
+                        err = BLEError.taskError(reason: .dataError)
+                        print("send data is invalid")
+                    }
+            
+                }
+                boolCallback?(bool, err)
+            }
+        }, toDeviceName: deviceName)
+    }
 }

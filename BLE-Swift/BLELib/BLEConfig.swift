@@ -21,8 +21,6 @@ public class BLEConfig: NSObject {
     public override init() {
         super.init()
         sendUUID[.normal] = UUID.c8001
-        sendUUID[.response] = UUID.c8003
-
         recvUUID[.normal] = UUID.c8002
     }
 }

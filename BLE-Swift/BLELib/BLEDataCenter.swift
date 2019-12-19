@@ -62,7 +62,6 @@ class BLEDataCenter: NSObject {
             beginTask()
             return
         }
-        
         DispatchQueue.main.async {
             task.callback?(task.data, task.error)
             task.callback = nil
@@ -169,7 +168,6 @@ class BLEDataCenter: NSObject {
     }
     
     func removeTask(task:BLEDataTask) {
-        
         taskCrudLock.lock()
         switch task.data.type {
         case .normal:

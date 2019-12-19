@@ -266,8 +266,6 @@
 		2BEDD8C82264274E001E0509 /* AddProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDD8C62264274E001E0509 /* AddProtocolVC.swift */; };
 		2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAF60F216F2089003AEAD6 /* BLEDataCenter.swift */; };
 		76C8C7ABC4084DA92023482F /* Pods_BLE_SwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A9D2E2F02B2CC16DA69B09 /* Pods_BLE_SwiftUITests.framework */; };
-		E22E940A23A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */; };
-		E22E941323A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */; };
 		E22E9A8C239117A700A151C2 /* BLECenterUtilExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
 /* End PBXBuildFile section */
@@ -575,8 +573,6 @@
 		8A5DE497842DC3B0E35F73E2 /* Pods_BLE_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC6235056F957FE37653119 /* Pods-BLE-SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftTests/Pods-BLE-SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		9BFEBD92D7DAADC7E15C65D6 /* Pods-BLE-SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-SwiftUITests/Pods-BLE-SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceReuqestObserver.swift; sourceTree = "<group>"; };
-		E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceHeartbeatObserver.swift; sourceTree = "<group>"; };
 		E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterUtilExtension.swift; sourceTree = "<group>"; };
 		EB1BF05F632A1B4FC85B5AEE /* Pods-BLE-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -963,7 +959,6 @@
 		2B4874CB214F763B00AC5841 /* BLELib */ = {
 			isa = PBXGroup;
 			children = (
-				E22E941123A245CA00ABBC55 /* DeviceRequestObserver */,
 				2B57032022486E070008208E /* Models */,
 				2BE7704621E497CF00FD6374 /* OTA */,
 				2B62A58D21E0A03C0051DD38 /* Error */,
@@ -978,7 +973,6 @@
 				2B404336216B367A00C6837B /* BLEToDo.swift */,
 				2B4874D02150C83B00AC5841 /* BLEDefines.swift */,
 				2B40433B216C9BF500C6837B /* BLETask.swift */,
-				E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */,
 				2B2E273B2172D13A00726FC7 /* BLEData.swift */,
 			);
 			path = BLELib;
@@ -1602,14 +1596,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E22E941123A245CA00ABBC55 /* DeviceRequestObserver */ = {
-			isa = PBXGroup;
-			children = (
-				E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */,
-			);
-			path = DeviceRequestObserver;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1963,12 +1949,10 @@
 				2BEDD8C322642702001E0509 /* EditProtocolVC.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
 				2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */,
-				E22E941323A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift in Sources */,
 				2B50C4DF221A9AC000D699D3 /* NetworkCode.swift in Sources */,
 				2B31472D2236358B0018495D /* AddDeviceCircleTestVC.swift in Sources */,
 				2B4874CF214F911300AC5841 /* BLEDevice.swift in Sources */,
 				2BEDD5B522323F220085A937 /* EnumObj.swift in Sources */,
-				E22E940A23A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift in Sources */,
 				2BEC5D6E217470C300E0902B /* BLEDataExtensions.swift in Sources */,
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
 				2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */,
@@ -2328,7 +2312,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -2349,7 +2333,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

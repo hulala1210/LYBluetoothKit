@@ -33,6 +33,9 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
             
         }
         didSet {
+            if otaDatas.count == 0 {
+                print("出事了")
+            }
              print("\(otaDatas)");
         }
     }
@@ -75,7 +78,8 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         self.finishCallback = finishCallback
         
         super.init()
-        self.device.delegate = self
+        // 此处不能设置delegate给self，不然Apollo平台会升级失败
+//        self.device.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(deviceDataUpdate(notification:)), name: BLEInnerNotification.deviceDataUpdate, object: nil)
     }

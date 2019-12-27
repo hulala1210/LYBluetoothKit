@@ -16,6 +16,15 @@ class OtaTlsrTask: OtaTask {
     
     private let heartbeatObserver = BLEDeviceHeartbeatObserver.init()
     
+    override init(device: BLEDevice, otaBleName: String, otaDatas: [OtaDataModel], readyCallback: EmptyBlock?, progressCallback: FloatCallback?, finishCallback: BoolCallback?) {
+        super.init(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: readyCallback, progressCallback: progressCallback, finishCallback: finishCallback);
+        self.device.delegate = self
+    }
+    
+    private func otaDeviceDataComes(data: Data) {
+        
+    }
+    
     override func start() {
         
         if device.state == .disconnected {
@@ -61,7 +70,7 @@ class OtaTlsrTask: OtaTask {
     
     private func startOta() {
         otaReady()
-        
+         
         let dm = otaDatas[0]
         startSendOtaData(dataModel: dm)
     }
@@ -126,100 +135,21 @@ class OtaTlsrTask: OtaTask {
             self.addTimer(timeout: 10, action: 2)
 
         }
-        
-        
-//        for index in 0 ..< totalLength {
-//
-//
-//            addTimer(timeout: 10, action: 2)
-//
-//            print("index:\(index), count:\(dataModel.tlsrOtaDataPackages.count), progress:\(progress)")
-//            let sd = dataModel.tlsrOtaDataPackages[index]
-//            writeData(data: sd)
-//
-//
-//            Thread.sleep(forTimeInterval: 0.01)
-////            dataModel.tlsrOtaDataIndex = dataModel.tlsrOtaDataIndex + 1
-//            // 最后一包
-//            if index + 1 == totalLength {
-//                isSingleOTAFinish = true
-//
-//                readData()
-//
-//                // 进度回调
-//                sendLength = totalLength
-//                DispatchQueue.main.async {
-//                    self.progressCallback?(1)
-//                    NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
-//                }
-//                return
-//            }
-//            else {
-//
-//                if index%64 == 0 {
-//                    print("Will readData Check CRC")
-//                    readData()
-//                }
-//
-//            }
-//
-//        }
-        
-//        // 发64个包校验一次
-//        let onceSendCount:Int = 1024 / 16
-//
-//        for i in 0 ..< onceSendCount
-//        {
-//
-//            // 最后一包
-//            if dataModel.tlsrOtaDataIndex + i == dataModel.tlsrOtaDataPackages.count {
-//                isSingleOTAFinish = true
-//
-//                readData()
-//
-//                // 进度回调
-//                sendLength = totalLength
-//                DispatchQueue.main.async {
-//                    self.progressCallback?(1)
-//                    NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
-//                }
-//                return
-//            }
-//
-//            let sd = dataModel.tlsrOtaDataPackages[dataModel.tlsrOtaDataIndex + i]
-//
-//            writeData(data: sd)
-//
-//            // 进度回调
-//            sendLength = dataModel.tlsrOtaDataIndex + i
-//
-//            print("index:\(dataModel.tlsrOtaDataIndex), count:\(dataModel.tlsrOtaDataPackages.count), progress:\(progress)")
-////            DispatchQueue.main.async {
-////
-////            }
-//
-//            print("hhahhaha");
-//            self.progressCallback?(self.progress)
-//            NotificationCenter.default.post(name: kOtaTaskProgressUpdateNotification, object: nil, userInfo: [BLEKey.task: self])
-//
-//            // 必须睡眠，否则ota失败，设备蓝牙速度慢
-//            Thread.sleep(forTimeInterval: 0.01)
-//        }
-//        if dataModel.tlsrOtaDataIndex == 0 {
-//            dataModel.tlsrOtaDataIndex += onceSendCount - 1
-//        }
-//        else {
-//            dataModel.tlsrOtaDataIndex += onceSendCount
-//        }
-        
-//        addTimer(timeout: 10, action: 2)
-//        print("Will readData Check CRC")
-//        readData()
     }
     
     
-    private func endOta() {
-        let buf = Data(bytes: [0x02, 0xff])
+    private func endOta(dataModel: OtaDataModel) {
+        
+        var adr_index:Int = Int(ceil(Double(dataModel.data.count)/16.0));
+        adr_index = adr_index - 1;
+        let lengthLowByte = adr_index % 0x100
+        let lengthHighByte = (adr_index - lengthLowByte) / 0x100 % 0x100
+        
+        var buf = Data(bytes: [0x02, 0xff])
+        buf.append(lengthLowByte.data(byteCount: 1))
+        buf.append(lengthHighByte.data(byteCount: 1))
+        buf.append((~lengthLowByte).data(byteCount: 1))
+        buf.append((~lengthHighByte).data(byteCount: 1))
         writeData(data: buf)
         otaFinish()
     }
@@ -269,7 +199,7 @@ class OtaTlsrTask: OtaTask {
             startSendOtaData(dataModel: otaDatas[0])
         }
         else {
-            endOta();
+            endOta(dataModel: otaDatas[0]);
         }
     }
     

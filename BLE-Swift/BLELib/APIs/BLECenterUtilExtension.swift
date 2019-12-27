@@ -158,6 +158,11 @@ extension Int {
         var int = self
         return Data(bytes: &int, count: MemoryLayout<Int>.size)
     }
+    
+    func data(byteCount:Int) -> Data {
+        var int = self
+        return Data(bytes: &int, count: byteCount)
+    }
 }
 
 extension UInt8 {
@@ -165,12 +170,22 @@ extension UInt8 {
         var int = self
         return Data(bytes: &int, count: MemoryLayout<UInt8>.size)
     }
+    
+    func data(byteCount:Int) -> Data {
+        var int = self
+        return Data(bytes: &int, count: byteCount)
+    }
 }
 
 extension UInt16 {
     var data: Data {
         var int = self
         return Data(bytes: &int, count: MemoryLayout<UInt16>.size)
+    }
+    
+    func data(byteCount:Int) -> Data {
+        var int = self
+        return Data(bytes: &int, count: byteCount)
     }
 }
 
@@ -180,6 +195,10 @@ extension UInt32 {
         return Data(bytes: &int, count: MemoryLayout<UInt32>.size)
     }
     
+    func data(byteCount:Int) -> Data {
+        var int = self
+        return Data(bytes: &int, count: byteCount)
+    }
 //    var byteArrayLittleEndian: [UInt8] {
 //        return [
 //            UInt8((self & 0xFF000000) >> 24),
@@ -194,5 +213,10 @@ extension UInt64 {
     var data: Data {
         var int = self
         return Data(bytes: &int, count: MemoryLayout<UInt64>.size)
+    }
+    
+    func data(byteCount:Int) -> Data {
+        var int = self
+        return Data(bytes: &int, count: byteCount)
     }
 }

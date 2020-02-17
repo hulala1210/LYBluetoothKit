@@ -67,6 +67,14 @@ class StorageUtils {
         return urls[0].path
     }
     
+    public static func getTempPath() -> String {
+//        let manager = FileManager.default
+//        let urls = manager.urls(for: .cachesDirectory, in: .userDomainMask)
+//        return urls[0].path
+        let tmpDir = NSTemporaryDirectory()
+        return tmpDir
+    }
+    
     public static func isFileExits(atPath path: String) -> Bool {
         let manager = FileManager.default
         return manager.fileExists(atPath: path)
@@ -137,4 +145,15 @@ class StorageUtils {
         }
     }
     
+    public static func getFiles(atDirectory directory: String) -> Array<String>? {
+        let manager = FileManager.default
+        do {
+
+            let result = try manager.subpathsOfDirectory(atPath: directory)
+            return result
+
+        } catch {
+            return nil
+        }
+    }
 }

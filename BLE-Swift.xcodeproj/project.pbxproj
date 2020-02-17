@@ -269,6 +269,20 @@
 		E22E940A23A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */; };
 		E22E941323A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */; };
 		E22E9A8C239117A700A151C2 /* BLECenterUtilExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */; };
+		E2AAF68D23C6F82500F5435C /* LxFTPRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAF68C23C6F82500F5435C /* LxFTPRequestExtension.swift */; };
+		E2AAF69523C875F000F5435C /* GBKEncodingUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AAF69423C875F000F5435C /* GBKEncodingUtil.m */; };
+		E2DADB7323C4546A00E16A36 /* ModuleSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DADB7123C4546A00E16A36 /* ModuleSelectionVC.swift */; };
+		E2DADB7423C4546A00E16A36 /* ModuleSelectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2DADB7223C4546A00E16A36 /* ModuleSelectionVC.xib */; };
+		E2DADB7723C4604500E16A36 /* SecretCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DADB7523C4604500E16A36 /* SecretCodeVC.swift */; };
+		E2DADB7823C4604500E16A36 /* SecretCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2DADB7623C4604500E16A36 /* SecretCodeVC.xib */; };
+		E2F45FC023C96B0B006B34DC /* UnzipFileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FBF23C96B0B006B34DC /* UnzipFileUtils.swift */; };
+		E2F45FC723C9756F006B34DC /* FTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FC523C9756E006B34DC /* FTPHelper.swift */; };
+		E2F45FC823C9756F006B34DC /* SFTPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FC623C9756E006B34DC /* SFTPHelper.swift */; };
+		E2F45FCC23CC1C44006B34DC /* BmobFactoryOTAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FCB23CC1C44006B34DC /* BmobFactoryOTAHelper.swift */; };
+		E2F45FCE23CC1C79006B34DC /* BmobFactoryOTAInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FCD23CC1C79006B34DC /* BmobFactoryOTAInfoModel.swift */; };
+		E2F45FD023CDBC3D006B34DC /* FactoryOTAExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FCF23CDBC3D006B34DC /* FactoryOTAExecuter.swift */; };
+		E2F45FD323CDC2DF006B34DC /* FactoryOTAExecutingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F45FD123CDC2DF006B34DC /* FactoryOTAExecutingVC.swift */; };
+		E2F45FD423CDC2DF006B34DC /* FactoryOTAExecutingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F45FD223CDC2DF006B34DC /* FactoryOTAExecutingVC.xib */; };
 		F5B483AB661D4095000C7ED7 /* Pods_BLE_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFED2B6D2ED38A974E68B62 /* Pods_BLE_Swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -578,6 +592,22 @@
 		E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceReuqestObserver.swift; sourceTree = "<group>"; };
 		E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceHeartbeatObserver.swift; sourceTree = "<group>"; };
 		E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterUtilExtension.swift; sourceTree = "<group>"; };
+		E2AAF68C23C6F82500F5435C /* LxFTPRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LxFTPRequestExtension.swift; sourceTree = "<group>"; };
+		E2AAF69323C875F000F5435C /* GBKEncodingUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBKEncodingUtil.h; sourceTree = "<group>"; };
+		E2AAF69423C875F000F5435C /* GBKEncodingUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBKEncodingUtil.m; sourceTree = "<group>"; };
+		E2DADB7123C4546A00E16A36 /* ModuleSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleSelectionVC.swift; sourceTree = "<group>"; };
+		E2DADB7223C4546A00E16A36 /* ModuleSelectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModuleSelectionVC.xib; sourceTree = "<group>"; };
+		E2DADB7523C4604500E16A36 /* SecretCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretCodeVC.swift; sourceTree = "<group>"; };
+		E2DADB7623C4604500E16A36 /* SecretCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecretCodeVC.xib; sourceTree = "<group>"; };
+		E2DADB7923C46B1800E16A36 /* BLE-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BLE-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		E2F45FBF23C96B0B006B34DC /* UnzipFileUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnzipFileUtils.swift; sourceTree = "<group>"; };
+		E2F45FC523C9756E006B34DC /* FTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTPHelper.swift; sourceTree = "<group>"; };
+		E2F45FC623C9756E006B34DC /* SFTPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFTPHelper.swift; sourceTree = "<group>"; };
+		E2F45FCB23CC1C44006B34DC /* BmobFactoryOTAHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BmobFactoryOTAHelper.swift; sourceTree = "<group>"; };
+		E2F45FCD23CC1C79006B34DC /* BmobFactoryOTAInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmobFactoryOTAInfoModel.swift; sourceTree = "<group>"; };
+		E2F45FCF23CDBC3D006B34DC /* FactoryOTAExecuter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryOTAExecuter.swift; sourceTree = "<group>"; };
+		E2F45FD123CDC2DF006B34DC /* FactoryOTAExecutingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryOTAExecutingVC.swift; sourceTree = "<group>"; };
+		E2F45FD223CDC2DF006B34DC /* FactoryOTAExecutingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactoryOTAExecutingVC.xib; sourceTree = "<group>"; };
 		EB1BF05F632A1B4FC85B5AEE /* Pods-BLE-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE-Swift/Pods-BLE-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -934,10 +964,14 @@
 			children = (
 				2B4874A9214F763500AC5841 /* Info.plist */,
 				2B48749D214F763400AC5841 /* AppDelegate.swift */,
+				E2DADB7123C4546A00E16A36 /* ModuleSelectionVC.swift */,
+				E2DADB7223C4546A00E16A36 /* ModuleSelectionVC.xib */,
 				2B62A56721DF67410051DD38 /* Resources */,
 				2B4874CB214F763B00AC5841 /* BLELib */,
+				E2DADB7023C4543600E16A36 /* FactoryOTATool */,
 				2B918D912153363900B0B5DE /* Demos */,
 				2B80C1E421EC34C000FE7BF7 /* LocalizableFiles */,
+				E2DADB7923C46B1800E16A36 /* BLE-Swift-Bridging-Header.h */,
 			);
 			path = "BLE-Swift";
 			sourceTree = "<group>";
@@ -1138,6 +1172,9 @@
 				2B5832E12175832200259593 /* StringExtensions.swift */,
 				2B3657A421DCCD600070E7AB /* Functions.swift */,
 				2BE7704121E48CB900FD6374 /* StorageUtils.swift */,
+				E2F45FBF23C96B0B006B34DC /* UnzipFileUtils.swift */,
+				E2F45FC523C9756E006B34DC /* FTPHelper.swift */,
+				E2F45FC623C9756E006B34DC /* SFTPHelper.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -1610,6 +1647,31 @@
 			path = DeviceRequestObserver;
 			sourceTree = "<group>";
 		};
+		E2AAF69223C875B100F5435C /* GBKEncodingUtil */ = {
+			isa = PBXGroup;
+			children = (
+				E2AAF69323C875F000F5435C /* GBKEncodingUtil.h */,
+				E2AAF69423C875F000F5435C /* GBKEncodingUtil.m */,
+			);
+			path = GBKEncodingUtil;
+			sourceTree = "<group>";
+		};
+		E2DADB7023C4543600E16A36 /* FactoryOTATool */ = {
+			isa = PBXGroup;
+			children = (
+				E2AAF69223C875B100F5435C /* GBKEncodingUtil */,
+				E2DADB7523C4604500E16A36 /* SecretCodeVC.swift */,
+				E2DADB7623C4604500E16A36 /* SecretCodeVC.xib */,
+				E2F45FD123CDC2DF006B34DC /* FactoryOTAExecutingVC.swift */,
+				E2F45FD223CDC2DF006B34DC /* FactoryOTAExecutingVC.xib */,
+				E2AAF68C23C6F82500F5435C /* LxFTPRequestExtension.swift */,
+				E2F45FCB23CC1C44006B34DC /* BmobFactoryOTAHelper.swift */,
+				E2F45FCD23CC1C79006B34DC /* BmobFactoryOTAInfoModel.swift */,
+				E2F45FCF23CDBC3D006B34DC /* FactoryOTAExecuter.swift */,
+			);
+			path = FactoryOTATool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1682,7 +1744,7 @@
 				TargetAttributes = {
 					2B487499214F763400AC5841 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1130;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1736,6 +1798,7 @@
 				2BE7704D21E49A3600FD6374 /* OtaDataSelectCell.xib in Resources */,
 				2B56A15E21F6F1D40073E2A7 /* LoginVC.xib in Resources */,
 				2BB4B6EE21E9C21C00F22268 /* OtaTaskDetailVC.xib in Resources */,
+				E2DADB7423C4546A00E16A36 /* ModuleSelectionVC.xib in Resources */,
 				2B314737223639840018495D /* AddDeviceCircleGroupVC.xib in Resources */,
 				2BE7CE6522549CAF00A60DDA /* ToolInitVC.xib in Resources */,
 				2B2F8A7522262F0C0078D69F /* TestConfigVC.xib in Resources */,
@@ -1784,6 +1847,7 @@
 				2B2F8A822226C0EA0078D69F /* ToolsObjCell.xib in Resources */,
 				2B31472E2236358B0018495D /* AddDeviceCircleTestVC.xib in Resources */,
 				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
+				E2DADB7823C4604500E16A36 /* SecretCodeVC.xib in Resources */,
 				2B80C1EE21EC35E700FE7BF7 /* PrefixAddVC.xib in Resources */,
 				2B5417E12244EBCD00C9F5DD /* HeartRateVC.xib in Resources */,
 				2BA3B58821FC35340084E291 /* ProtocolExcuteVC.xib in Resources */,
@@ -1804,6 +1868,7 @@
 				2B62A57D21E042680051DD38 /* ProtocolMenuCell.xib in Resources */,
 				2B3C1C41218FEB37007F7DC6 /* DeviceCell.xib in Resources */,
 				2B5417E52244EBD700C9F5DD /* SleepVC.xib in Resources */,
+				E2F45FD423CDC2DF006B34DC /* FactoryOTAExecutingVC.xib in Resources */,
 				2B707702225E1141007C5D17 /* DeviceTestVC.xib in Resources */,
 				2B80C21021EC612E00FE7BF7 /* PrefixSelectVC.xib in Resources */,
 				2B7AB99121EECE5900D01E39 /* AddDeviceTestVC.xib in Resources */,
@@ -1925,6 +1990,8 @@
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
 				2B57031F224867C10008208E /* BLECenterSportExtension.swift in Sources */,
 				2B54064A225E1E5A00B86EFF /* DeviceTestSubjectView.swift in Sources */,
+				E2F45FCE23CC1C79006B34DC /* BmobFactoryOTAInfoModel.swift in Sources */,
+				E2DADB7323C4546A00E16A36 /* ModuleSelectionVC.swift in Sources */,
 				2B8272FF21F7FA0700F6CC9E /* OtaNordicTask.swift in Sources */,
 				2B2E273E2172D9B400726FC7 /* BLEConfig.swift in Sources */,
 				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
@@ -1933,6 +2000,7 @@
 				2B3147392236852E0018495D /* CircleTestGroupView.swift in Sources */,
 				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
+				E2DADB7723C4604500E16A36 /* SecretCodeVC.swift in Sources */,
 				2B57032222486EAB0008208E /* Sport.swift in Sources */,
 				2B4AB46321F0215A00EF5327 /* CmdKeyBoardView.swift in Sources */,
 				2B44C74D21EEE32D0037F5C3 /* CmdInputLayout.swift in Sources */,
@@ -1961,6 +2029,7 @@
 				2B56A15D21F6F1D40073E2A7 /* LoginVC.swift in Sources */,
 				2B2E273C2172D13A00726FC7 /* BLEData.swift in Sources */,
 				2BEDD8C322642702001E0509 /* EditProtocolVC.swift in Sources */,
+				E2F45FC723C9756F006B34DC /* FTPHelper.swift in Sources */,
 				2B918D932153365A00B0B5DE /* ConnectVC.swift in Sources */,
 				2BE7701621E2FBA700FD6374 /* BLEStringExtensions.swift in Sources */,
 				E22E941323A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift in Sources */,
@@ -1973,14 +2042,17 @@
 				2B9DD97821E72C7600C215E5 /* SDOtaVC.swift in Sources */,
 				2B06DDED222397180062E7CB /* ProtocolObjCell.swift in Sources */,
 				2BEDD5AF22323C750085A937 /* EnumManagerVC.swift in Sources */,
+				E2F45FD323CDC2DF006B34DC /* FactoryOTAExecutingVC.swift in Sources */,
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2BE7CE77225C443A00A60DDA /* WatchInfoEditVC.swift in Sources */,
 				2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,
+				E2AAF69523C875F000F5435C /* GBKEncodingUtil.m in Sources */,
 				2B57032D2248C5500008208E /* Sleep.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
 				2B86063D2238D1E400728B0B /* DeviceTestConfigsVC.swift in Sources */,
+				E2F45FD023CDBC3D006B34DC /* FactoryOTAExecuter.swift in Sources */,
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
 				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
 				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
@@ -2001,10 +2073,12 @@
 				2B9DD96A21E717EA00C215E5 /* PrefixCell.swift in Sources */,
 				2B9DD97B21E745AD00C215E5 /* OtaTaskTipView.swift in Sources */,
 				2B45B95D21EDF5A50058E137 /* DeviceTestGroup.swift in Sources */,
+				E2AAF68D23C6F82500F5435C /* LxFTPRequestExtension.swift in Sources */,
 				2B45B94E21EDABE90058E137 /* DeviceProduct.swift in Sources */,
 				2B4AB46121F01D0500EF5327 /* CmdTextField.swift in Sources */,
 				2B7C9232221FE6DB005C905A /* ModifyNameVC.swift in Sources */,
 				2B06DDEA222393B80062E7CB /* ProtocolObj.swift in Sources */,
+				E2F45FC823C9756F006B34DC /* SFTPHelper.swift in Sources */,
 				2BE7704221E48CB900FD6374 /* StorageUtils.swift in Sources */,
 				2B56A14C21F6F0210073E2A7 /* FirmwareManagerVC.swift in Sources */,
 				2B5188F122141C08003E2EF5 /* OtaTlsrTask.swift in Sources */,
@@ -2059,6 +2133,7 @@
 				2B5703262248B13F0008208E /* SportDetailVC.swift in Sources */,
 				2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
+				E2F45FC023C96B0B006B34DC /* UnzipFileUtils.swift in Sources */,
 				2B9DD97421E729DD00C215E5 /* BLECenterExtensions.swift in Sources */,
 				2B45441C21F5996A00FC3E91 /* ZdOtaTask.swift in Sources */,
 				2B31472822362C130018495D /* StressTestingVC.swift in Sources */,
@@ -2079,6 +2154,7 @@
 				2B54064D225ECD4800B86EFF /* DeviceTestFunctionCell.swift in Sources */,
 				2B4AB47B21F3035B00EF5327 /* ZdOtaConfigVC.swift in Sources */,
 				2B5832E421758ECA00259593 /* NumberView.swift in Sources */,
+				E2F45FCC23CC1C44006B34DC /* BmobFactoryOTAHelper.swift in Sources */,
 				2B4AB47521F2C27D00EF5327 /* SplitLineView.swift in Sources */,
 				2B5417DC2244EBC100C9F5DD /* SportVC.swift in Sources */,
 				2B45B95A21EDE6C70058E137 /* DeviceTestVC.swift in Sources */,
@@ -2320,6 +2396,7 @@
 			baseConfigurationReference = EB1BF05F632A1B4FC85B5AEE /* Pods-BLE-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-Swift/Info.plist";
@@ -2328,9 +2405,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BLE-Swift/BLE-Swift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2341,6 +2420,7 @@
 			baseConfigurationReference = 43E8BBB9CBBFC5F3B677A6E5 /* Pods-BLE-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W74YV9GZDZ;
 				INFOPLIST_FILE = "BLE-Swift/Info.plist";
@@ -2349,9 +2429,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.ss.BLE-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BLE-Swift/BLE-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

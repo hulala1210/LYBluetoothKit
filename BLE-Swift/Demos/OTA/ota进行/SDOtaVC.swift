@@ -161,8 +161,6 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         }, toDeviceName: config.deviceName)
     }
     
-    
-    
     @IBAction func resetBtnClick(_ sender: Any) {
         
         startLoading(nil)

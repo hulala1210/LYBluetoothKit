@@ -67,17 +67,43 @@ class ZdOtaTask: Equatable {
         }
         
         var otaDatas = [OtaDataModel]()
+        
+        var nordicDatData:Data? = nil
+        
         for fm in config.firmwares {
             
-            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+//            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            let path = fm.path
             
-            do {
-                var data = try Data(contentsOf: URL(fileURLWithPath: path))
-                let dm = OtaDataModel(type: fm.type, data: data)
-                otaDatas.append(dm)
-                data.removeAll()
+//            do {
+//                var data = try Data(contentsOf: URL(fileURLWithPath: path))
+//                let dm = OtaDataModel(type: fm.type, data: data)
+//                otaDatas.append(dm)
+//                data.removeAll()
+//            }
+//            catch {}
+            
+            let data = StorageUtils.getData(atPath: path)
+            
+            print(path)
+            
+            if (data != nil) {
+                
+                if path.hasSuffix(".dat") && config.platform == .nordic {
+                    nordicDatData = data
+                }
+                else {
+                    let dm = OtaDataModel(type: fm.type, data: data!)
+                    otaDatas.append(dm)
+                }
+                
             }
-            catch {}
+        }
+        
+        if config.platform == .nordic && nordicDatData != nil {
+            for otaData in otaDatas {
+                otaData.datData = nordicDatData
+            }
         }
         
         if device.isApollo3 {
@@ -186,7 +212,16 @@ class ZdOtaTask: Equatable {
     private var connectCount = 0
     private func startResetDevice() {
         print("ota(\(name))成功了，开始等待连接，并重置设备")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+        
+        var delay:Double = 20
+        for fw in self.config.firmwares {
+            if fw.type == .touchPanel {
+                delay = 90
+                break
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.connectDevice()
         }
     }

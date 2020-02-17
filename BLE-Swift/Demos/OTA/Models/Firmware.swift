@@ -19,11 +19,15 @@ class Firmware: Codable, Equatable {
 //    }
     var path = ""
     var versionName = ""
-    var versionCode = 0
+    var versionCode = 0.0
     var type: OtaDataType = .platform
     var createTime: TimeInterval = Date().timeIntervalSince1970
     
-    static func getOtaType(withFileName fileName: String) -> OtaDataType{
+    var description:String {
+        return "FW_Path" + self.path
+    }
+    
+    static func getOtaType(withFileName fileName: String) -> OtaDataType {
         let tmp = fileName.lowercased()
         if tmp.hasPrefix("apollo") {
             return .platform
@@ -44,6 +48,12 @@ class Firmware: Codable, Equatable {
             return .heartRate
         }
         else if tmp.hasPrefix("picture") {
+            return .picture
+        }
+        else if tmp.hasPrefix("language") {
+            return .picture
+        }
+        else if tmp.hasPrefix("resmap") {
             return .picture
         }
         else if tmp.hasPrefix("touchpanel") {
@@ -81,4 +91,6 @@ class Firmware: Codable, Equatable {
     static func == (lhs: Firmware, rhs: Firmware) -> Bool {
         return lhs.name == rhs.name
     }
+    
+    
 }

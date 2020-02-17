@@ -31,7 +31,9 @@ struct OtaConfig: Codable {
     var otaCount = 0
     var needReset = false
     var firmwares: [Firmware] = []
+    
     var otaBleName: String?
+    var targetDeviceType: String?
     
     func getFirmwares(byType type: OtaDataType) -> [Firmware] {
         var arr = [Firmware]()
@@ -42,4 +44,29 @@ struct OtaConfig: Codable {
         }
         return arr
     }
+    
+    func copyConfig() -> OtaConfig {
+        var newConfig = OtaConfig()
+        
+        newConfig.id = self.id
+        newConfig.autoReset = self.autoReset
+        newConfig.platform = self.platform
+        newConfig.createTime = self.createTime
+        newConfig.name = self.name
+        newConfig.type = self.type
+        newConfig.batchId = self.batchId
+        newConfig.prefix = self.prefix
+        newConfig.deviceName = self.deviceName
+        newConfig.deviceNamePrefix = self.deviceNamePrefix
+        newConfig.signalMin = self.signalMin
+        newConfig.upgradeCountMax = self.upgradeCountMax
+        newConfig.otaCount = self.otaCount
+        newConfig.needReset = self.needReset
+        newConfig.firmwares = self.firmwares
+        newConfig.otaBleName = self.otaBleName
+        newConfig.targetDeviceType = self.targetDeviceType
+
+        return newConfig
+    }
+    
 }

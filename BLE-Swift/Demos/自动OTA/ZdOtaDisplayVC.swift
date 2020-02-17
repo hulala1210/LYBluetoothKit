@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftScanner
 
 class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -131,6 +132,10 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                 continue
             }
             
+            if d.name.hasPrefix("Helio") {
+                print("get")
+            }
+            
             if d.name.hasPrefix(config.deviceNamePrefix), d.rssi >= config.signalMin {
                 hasFitOne = true
                 // 只有ota准备好之后，这个值才会变成false
@@ -181,15 +186,119 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             return
         }
         
-        let task = ZdOtaTask(name: device.name, config: config)
-        taskList.append(task)
+        let leadToOTAFailed = {
+            let failedTask = ZdOtaTask(name: device.name, config: self.config)
+            let note = Notification.init(name: kZdOtaTaskFailed, object: nil, userInfo: ["task":failedTask])
+            self.otaTaskFailed(notification: note)
+        }
         
-        printLog("开始OTA(\(device.name))")
-        task.startOTA(withDevice: device)
+        let startOTABlock = {
+            
+            self.printLog("开始获取设备版本号(\(device.name))")
+            
+            weak var weakSelf = self
+            // 校验版本号，踢出不需要升级的图库固件
+            self.getFirmwareVersion(deviceName: device.name) { (firmwareString, error) in
+                if firmwareString != nil {
+                    self.printLog("获取到设备版本号：(\(firmwareString!))")
+
+                    let PictureFMAbbreviations = "R"
+
+                    let tmpChar = CharacterSet.init(charactersIn: PictureFMAbbreviations)
+                    let tmpComponents = firmwareString?.components(separatedBy: tmpChar)
+                    
+                    if tmpComponents != nil && tmpComponents!.count > 1 {
+                        let tmpComp = tmpComponents?.last
+                        let scanner = Scanner.init(string: tmpComp!)
+                        var versionValue:Double = 0.0
+                        let success = scanner.scanDouble(&versionValue)
+                        if success {
+                            
+                            let fwArr = self.config.firmwares
+                            var finalConfig = self.config.copyConfig()
+                            
+                            var finalFwArr:Array<Firmware> = []
+                            for fw:Firmware in fwArr {
+                                if fw.type != OtaDataType.picture {
+                                    finalFwArr.append(fw)
+                                }
+                                else if fw.versionCode > versionValue {
+                                    finalFwArr.append(fw)
+                                }
+                            }
+                            finalConfig.firmwares = finalFwArr
+                            let task = ZdOtaTask(name: device.name, config: finalConfig)
+                            self.taskList.append(task)
+                            task.startOTA(withDevice: device)
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                        else {
+                            weakSelf?.showError("从固件中没获取到图库版本号")
+                            // 此task无需start
+                            leadToOTAFailed()
+                        }
+                    }
+                }
+                else {
+                    self.printLog("获取设备版本号失败，")
+                    weakSelf?.showError(error?.localizedDescription)
+                    // 此task无需start
+                    leadToOTAFailed()
+                }
+            }
+            
+            
+            
+        }
         
-        tableView.reloadData()
+        // 校验deviceType
+        if self.config.targetDeviceType != nil {
+            // 获取deviceType，如果targetDeviceType和获取到的deviceType不匹配，则什么也不做，直接当做升级失败。
+            let _ = BLECenter.shared.getDeviceType(stringCallback: { (deviceType:String?, error:BLEError?) in
+                
+                if self.config.targetDeviceType?.count == 0 || deviceType == self.config.targetDeviceType {
+                    startOTABlock()
+                }
+                else {
+                    // 此task无需start
+                    leadToOTAFailed()
+                }
+                
+            }, toDeviceName: device.name)
+        }
+        else {
+            // 如果没有设置targetDeviceType，则默认是可以直接升级的。
+            startOTABlock()
+        }
+        
+    }
+       
+    func getFirmwareVersion(deviceName:String?, cb:StringCallback?) {
+        startLoading(nil)
+
+        weak var weakSelf = self
+        _ = BLECenter.shared.getFirmwareVersion(stringCallback: { (firmwareString, error) in
+            weakSelf?.stopLoading()
+            if cb != nil {
+                cb! (firmwareString, error)
+            }
+        }, toDeviceName: deviceName)
     }
     
+    func getDeviceType(cb:StringCallback?) -> Void {
+        startLoading(nil)
+        weak var weakSelf = self
+
+        _ = BLECenter.shared.getDeviceType(stringCallback: { (deviceType, error) in
+            weakSelf?.stopLoading()
+            if cb != nil {
+                cb! (deviceType, error)
+            }
+        })
+    }
     
     private func getOtaingCount() -> Int {
         var count = 0

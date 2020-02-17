@@ -16,7 +16,6 @@ class ProtocolService {
     
     static let shared = ProtocolService()
     
-    
     var protocolMenus: [ProtocolMenu] = []
     
     private init() {

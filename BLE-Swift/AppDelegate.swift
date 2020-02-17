@@ -24,15 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         createFirmwareDirectory()
         
-        SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.width - 80;
-        SlideMenuOptions.panGesturesEnabled = false
-        
         window = UIWindow(frame: UIScreen.main.bounds)
-        let homeVC = HomeViewController()
         
-        let slideVC = SlideMenuController(mainViewController: homeVC, leftMenuViewController: LeftViewController())
-
-        window?.rootViewController = slideVC
+        let selectionVC = ModuleSelectionVC()
+        window?.rootViewController = selectionVC
         window?.makeKeyAndVisible()
         
 //        BLEConfig.shared.shouldSend03End = false

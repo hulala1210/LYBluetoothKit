@@ -240,6 +240,16 @@ class BaseViewController: UIViewController {
         SVProgressHUD.dismiss()
     }
     
+    func showProgress(progress:Float, status:String?) {
+        SVProgressHUD.setDefaultMaskType(.none)
+        SVProgressHUD.showProgress(progress, status: status)
+    }
+    
+    func showProgress(progress:Float) {
+        SVProgressHUD.setDefaultMaskType(.none)
+        SVProgressHUD.showProgress(progress)
+    }
+    
     func alert(msg:String,
                confirmText:String = "OK",
                confirmSel:Selector?,

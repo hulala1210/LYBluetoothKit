@@ -15,7 +15,15 @@ class ModuleSelectionVC: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func autoTestToolButtonAction(_ sender: Any) {
+        let vc = FactoryTestSecretCodeVC()
+        let nav = UINavigationController.init(rootViewController: vc)
+        
+        let window:UIWindow = (UIApplication.shared.delegate?.window ?? nil)!
+        window.rootViewController = nav
+    }
+    
     @IBAction func factoryTestButtonAction(_ sender: UIButton) {
         let vc = SecretCodeVC()
         let nav = UINavigationController.init(rootViewController: vc)

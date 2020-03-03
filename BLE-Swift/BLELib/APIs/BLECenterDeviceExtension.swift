@@ -44,6 +44,10 @@ extension BLECenter {
         return getVersionStr(forType: 1, stringCallback: stringCallback, toDeviceName: deviceName)
     }
     
+    public func getHardwareVersion(stringCallback:StringCallback?, toDeviceName deviceName:String?) -> BLETask? {
+        return getVersionStr(forType: 2, stringCallback: stringCallback, toDeviceName: deviceName)
+    }
+    
     public func getDateFirmwareVersion(stringCallback:StringCallback?, toDeviceName deviceName:String?) -> BLETask? {
         return getVersionStr(forType: 6, stringCallback: stringCallback, toDeviceName: deviceName)
     }
@@ -55,14 +59,14 @@ extension BLECenter {
         return send(data: data, dataArrayCallback: { (dataArray, error) in
             
             if stringCallback != nil {
-                if error != nil && dataArray != nil && dataArray!.count > 0 {
-                    stringCallback!(nil, error)
-                }
-                else {
+                if error == nil && dataArray != nil && dataArray!.count > 0 {
                     let data = dataArray![0];
                     let subdata = data[1...data.count - 1]
                     let versionStr = String(bytes: subdata, encoding: String.Encoding.utf8)
                     stringCallback!(versionStr, error)
+                }
+                else {
+                    stringCallback!(nil, error)
                 }
             }
             

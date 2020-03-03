@@ -122,7 +122,6 @@ class SecretCodeVC: BaseViewController {
         self.navigationController?.pushViewController(otaVC, animated: true)
     }
     
-    
     private func unSubZipActionIfNeeded(localDirectory:String, destinationDirectory:String!, progress:UnzipFileProgress?, completion:UnzipFileCompletion?) -> Bool {
         var needed:Bool = false
         
@@ -190,6 +189,10 @@ class SecretCodeVC: BaseViewController {
                         
                         let fwUpdatingDir = unzipDestinationDir.stringByAppending(pathComponent: unZipComponent).stringByAppending(pathComponent: "Update")
                         
+                        if !StorageUtils.isFileExits(atPath: fwUpdatingDir) {
+                            self.alert(msg: "检测到固件压缩包内文件结构不符合规范，无法进行后面的步骤，请联系发版人员规范发版文件结构。",confirmText:"知道了", confirmSel: nil, cancelText: nil, cancelSel: nil)
+                            return
+                        }
                         
                         let needUnzipSubFile = self.unSubZipActionIfNeeded(localDirectory: fwUpdatingDir, destinationDirectory: destinationDirectory, progress: progress, completion: completion)
                         

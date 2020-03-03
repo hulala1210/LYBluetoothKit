@@ -8,8 +8,8 @@
 
 import UIKit
 
-
 public enum FinishedProductTestCaseType:Int , Codable {
+    case unknown = -1
     case normal = 0
     case movement
     case calibration

@@ -35,7 +35,7 @@ class BmobFactoryOTAInfoModel: NSObject {
         self.fileFTPPath = (bmobObj.object(forKey: "fileFTPPath") as! String)
         self.platform = (bmobObj.object(forKey: "platform") as! String)
         
-        self.otaSerialNumber = (bmobObj.object(forKey: "otaSerialNumber") as! Int)
+        self.otaSerialNumber = Int((bmobObj.object(forKey: "otaSerialNumber") as! Double))
         self.customerName = (bmobObj.object(forKey: "customerName") as! String)
         self.productName = (bmobObj.object(forKey: "productName") as! String)
         self.deviceType = (bmobObj.object(forKey: "deviceType") as? String)

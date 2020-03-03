@@ -49,6 +49,9 @@ class FactoryTestCaseListVC: BaseViewController, UITableViewDelegate, UITableVie
         default: break
             
         }
+        
+        let vc = FactoryTestBaseVC.init()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     /*

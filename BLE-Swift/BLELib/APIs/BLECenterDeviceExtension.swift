@@ -73,10 +73,10 @@ extension BLECenter {
         }, toDeviceName: deviceName)
     }
     
-    public func resetDevice(boolCallback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
-        let data = Data(bytes: [0x6F,0x0D,0x71,0x01,0x00,0x00,0x8F])
-        return send(data: data, boolCallback: boolCallback, toDeviceName: deviceName)
-    }
+//    public func resetDevice(boolCallback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
+//        let data = Data(bytes: [0x6F,0x0D,0x71,0x01,0x00,0x00,0x8F])
+//        return send(data: data, boolCallback: boolCallback, toDeviceName: deviceName)
+//    }
     
     public func responseToHeatbeat(boolCallback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
         let data = Data(bytes: [0x6f,0x01,0x81,0x02,0x00,0xd9,0x00,0x8f])

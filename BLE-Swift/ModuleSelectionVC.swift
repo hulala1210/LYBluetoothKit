@@ -14,11 +14,12 @@ class ModuleSelectionVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        Bmob.register(withAppKey: "5cde76787542587a7ce90b2b54ef1f97")
     }
     
     @IBAction func autoTestToolButtonAction(_ sender: Any) {
         let vc = FactoryTestSecretCodeVC()
-        let nav = UINavigationController.init(rootViewController: vc)
+        let nav = LYNavigationController.init(rootViewController: vc)
         
         let window:UIWindow = (UIApplication.shared.delegate?.window ?? nil)!
         window.rootViewController = nav
@@ -26,7 +27,7 @@ class ModuleSelectionVC: UIViewController {
     
     @IBAction func factoryTestButtonAction(_ sender: UIButton) {
         let vc = SecretCodeVC()
-        let nav = UINavigationController.init(rootViewController: vc)
+        let nav = LYNavigationController.init(rootViewController: vc)
         
         let window:UIWindow = (UIApplication.shared.delegate?.window ?? nil)!
         window.rootViewController = nav

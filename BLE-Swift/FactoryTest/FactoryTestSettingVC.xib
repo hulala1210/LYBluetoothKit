@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FactoryTestSettingVC" customModule="BLE_Swift" customModuleProvider="target">
+            <connections>
+                <outlet property="buildPick" destination="3ZU-LZ-zl2" id="cEO-3y-nN7"/>
+                <outlet property="firmwareVersionPick" destination="ZOO-v7-bf8" id="fUm-TV-9Rs"/>
+                <outlet property="hardwareVersionPick" destination="60P-3C-doC" id="48g-GB-BQB"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="534"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="固件版本:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yit-3b-Y9W">
+                    <rect key="frame" x="8" y="52" width="74" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOO-v7-bf8">
+                    <rect key="frame" x="0.0" y="73" width="236.5" height="216"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xfd-Gf-wzA"/>
+                        <outlet property="delegate" destination="-1" id="vFB-Nt-xIQ"/>
+                    </connections>
+                </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="buid：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhH-IT-aGq">
+                    <rect key="frame" x="256.5" y="52" width="51" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="硬件版本：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-Y7-0Vc">
+                    <rect key="frame" x="8" y="297" width="87" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60P-3C-doC">
+                    <rect key="frame" x="0.0" y="318" width="236.5" height="216"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Wsc-wM-mJH"/>
+                        <outlet property="delegate" destination="-1" id="lo3-UE-b3N"/>
+                    </connections>
+                </pickerView>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZU-LZ-zl2">
+                    <rect key="frame" x="256.5" y="73" width="157.5" height="216"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="P4T-RI-HzZ"/>
+                        <outlet property="delegate" destination="-1" id="6hP-eQ-PH2"/>
+                    </connections>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ZOO-v7-bf8" firstAttribute="top" secondItem="Yit-3b-Y9W" secondAttribute="bottom" id="0zt-e5-3D0"/>
+                <constraint firstItem="3ZU-LZ-zl2" firstAttribute="leading" secondItem="ZOO-v7-bf8" secondAttribute="trailing" constant="20" id="3x7-fO-H6i"/>
+                <constraint firstItem="LAV-Y7-0Vc" firstAttribute="top" secondItem="ZOO-v7-bf8" secondAttribute="bottom" constant="8" id="4H5-cw-w5I"/>
+                <constraint firstItem="Yit-3b-Y9W" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="6Ey-aG-1UY"/>
+                <constraint firstItem="3ZU-LZ-zl2" firstAttribute="top" secondItem="DhH-IT-aGq" secondAttribute="bottom" id="6d7-zc-ILb"/>
+                <constraint firstItem="DhH-IT-aGq" firstAttribute="top" secondItem="Yit-3b-Y9W" secondAttribute="top" id="M2H-Ej-Qio"/>
+                <constraint firstItem="60P-3C-doC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TQb-Ps-p6w"/>
+                <constraint firstItem="60P-3C-doC" firstAttribute="top" secondItem="LAV-Y7-0Vc" secondAttribute="bottom" id="TcD-5i-Cq9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3ZU-LZ-zl2" secondAttribute="trailing" id="ZBN-qM-waz"/>
+                <constraint firstItem="LAV-Y7-0Vc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="baD-eE-l3f"/>
+                <constraint firstItem="60P-3C-doC" firstAttribute="trailing" secondItem="ZOO-v7-bf8" secondAttribute="trailing" id="f3W-Dh-nr5"/>
+                <constraint firstItem="60P-3C-doC" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="gXz-dy-VkX"/>
+                <constraint firstItem="ZOO-v7-bf8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mYp-Za-Xrq"/>
+                <constraint firstItem="DhH-IT-aGq" firstAttribute="leading" secondItem="3ZU-LZ-zl2" secondAttribute="leading" id="nJs-zM-Zgf"/>
+                <constraint firstItem="3ZU-LZ-zl2" firstAttribute="width" secondItem="ZOO-v7-bf8" secondAttribute="width" multiplier="1:1.5" id="sKb-vU-5Cn"/>
+                <constraint firstItem="Yit-3b-Y9W" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="yQN-0t-e8o"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="31.473214285714285"/>
+        </view>
+    </objects>
+</document>

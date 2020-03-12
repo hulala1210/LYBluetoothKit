@@ -11,9 +11,18 @@ import UIKit
 class BLEDeviceNumTestOp: BaseOperation {
     override func mainAction() {
         super.mainAction()
+        
+        if self.isCancelled {
+            return
+        }
+        
         self.isTaskExecuting = true
         let queue:TestOpQueue = self.queue as! TestOpQueue
         let _ = BLECenter.shared.getDeviceID(stringCallback: { (versionString, error) in
+            
+            if self.isCancelled {
+                return
+            }
             
             if versionString == nil || error != nil {
                 if self.failedBlock != nil {
@@ -24,8 +33,7 @@ class BLEDeviceNumTestOp: BaseOperation {
                 queue.message = queue.message + "\nDevice ID:\(versionString!)"
             }
             
-            self.isTaskExecuting = false
-            self.isTaskFinished = true
+            self.done()
         }, toDeviceName: queue.device?.name)
     }
 }

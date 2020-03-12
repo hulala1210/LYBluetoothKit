@@ -8,17 +8,26 @@
 
 import UIKit
 
-class FactoryTestConfig: NSObject {
-    var testGroupsSerial:Array<Int> = []
-//    var name = ""
-//    var remark = ""
-    var secretCode = ""
-    var bleName = ""
+class FactoryTestConfig {
+    var testGroupsSerial:Array<Int>! = []
+    var secretCode:String! = ""
+    var bleNamePrefix:String! = ""
     
-    public init(bmobObj:BmobObject) {
-        self.testGroupsSerial = bmobObj.object(forKey: "testCaseGroupsSerial") as! Array<Int>
-        self.secretCode = bmobObj.object(forKey: "secretCode") as! String
-        self.bleName = bmobObj.object(forKey: "testCaseGroupsSerial") as! String
-
+    public static func testConfig(bmobObj:BmobObject!) -> FactoryTestConfig? {
+        let testGroupsSerial = bmobObj.object(forKey: "testCaseGroupsSerial") as? Array<Int>
+        let secretCode = bmobObj.object(forKey: "secretCode") as? String
+        let bleNamePrefix = bmobObj.object(forKey: "bleNamePrefix") as? String
+        
+        if testGroupsSerial == nil || secretCode == nil || bleNamePrefix == nil {
+            return nil
+        }
+        else {
+            let config = FactoryTestConfig()
+            config.testGroupsSerial = testGroupsSerial!
+            config.secretCode = secretCode!
+            config.bleNamePrefix = bleNamePrefix
+            
+            return config
+        }
     }
 }

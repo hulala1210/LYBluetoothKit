@@ -11,6 +11,7 @@ import UIKit
 class TestOpQueue: BaseOperationQueue {
     
     public var device:BLEDevice?
-    public var message:String! = ""
-    
+    @objc dynamic public var message:String! = ""
+    public var badMessage:String! = ""
+    public var image:UIImage?
 }

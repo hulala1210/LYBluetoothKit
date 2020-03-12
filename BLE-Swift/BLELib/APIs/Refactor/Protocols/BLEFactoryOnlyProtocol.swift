@@ -9,26 +9,35 @@
 import Foundation
 protocol BLEFactoryOnlyProtocol {
     // protocol definition goes here
-    func checkGesensor(callback:StringCallback?, toDeviceName deviceName:String?) -> BLETask?
+    func checkGesensor(callback:DataArrayCallback?, toDeviceName deviceName:String?) -> BLETask?
     
-    func checkMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
+    func startMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
+
+    func stopMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
     
     func checkFlash(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
     
     func checkHeartRate(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
     
     func checkBLEName(callback:StringCallback?, toDeviceName deviceName:String?) -> BLETask?
+    
+    func checkBuzzer(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
 }
 
 extension BLEFactoryOnlyProtocol {
 
-    func checkGesensor(callback:StringCallback?, toDeviceName deviceName:String?) -> BLETask? {
+    func checkGesensor(callback:DataArrayCallback?, toDeviceName deviceName:String?) -> BLETask? {
         let data = Data(bytes: [0x6f, 0xfc, 0x70, 0x01, 0x00, 0x00, 0x8f])
-        return BLECenter.shared.send(data: data, stringCallback: callback, toDeviceName: deviceName)
+        return BLECenter.shared.send(data: data, dataArrayCallback: callback, toDeviceName: deviceName)
     }
 
-    func checkMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
+    func startMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
         let data = Data(bytes: [0x6F, 0xFA, 0x71, 0x01, 0x00, 0x01, 0x8F])
+        return BLECenter.shared.send(data: data, boolCallback: callback, toDeviceName: deviceName)
+    }
+    
+    func stopMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
+        let data = Data(bytes: [0x6F, 0xFA, 0x71, 0x01, 0x00, 0x00, 0x8F])
         return BLECenter.shared.send(data: data, boolCallback: callback, toDeviceName: deviceName)
     }
 
@@ -45,5 +54,10 @@ extension BLEFactoryOnlyProtocol {
     func checkBLEName(callback:StringCallback?, toDeviceName deviceName:String?) -> BLETask? {
         let data = Data(bytes: [0x6f, 0xf9, 0x70, 0x01, 0x00, 0x00, 0x8f])
         return BLECenter.shared.send(data: data, stringCallback: callback, toDeviceName: deviceName)
+    }
+    
+    func checkBuzzer(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask? {
+        let data = Data(bytes: [0x6f, 0xf9, 0x70, 0x01, 0x00, 0x00, 0x8f])
+        return BLECenter.shared.send(data: data, boolCallback: callback, toDeviceName: deviceName)
     }
 }

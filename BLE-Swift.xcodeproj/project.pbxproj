@@ -270,6 +270,15 @@
 		E22E940A23A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */; };
 		E22E941323A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */; };
 		E22E9A8C239117A700A151C2 /* BLECenterUtilExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */; };
+		E262DF262415EA9E00E1C708 /* BLEBuzzerTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF252415EA9E00E1C708 /* BLEBuzzerTestOp.swift */; };
+		E262DF2824162BB600E1C708 /* BLEAntiMinuteRotationOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF2724162BB600E1C708 /* BLEAntiMinuteRotationOp.swift */; };
+		E262DF342416341300E1C708 /* BLECenterFactoryOnlyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF302416341200E1C708 /* BLECenterFactoryOnlyExtension.swift */; };
+		E262DF352416341300E1C708 /* BLEFactoryOnlyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF312416341200E1C708 /* BLEFactoryOnlyProtocol.swift */; };
+		E262DF362416341300E1C708 /* BLEDeviceCtrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF322416341200E1C708 /* BLEDeviceCtrlProtocol.swift */; };
+		E262DF372416341300E1C708 /* BLEDevicePointerCtrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF332416341200E1C708 /* BLEDevicePointerCtrlProtocol.swift */; };
+		E262DF3924163C2100E1C708 /* BLEMinuteRotationOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF3824163C2100E1C708 /* BLEMinuteRotationOp.swift */; };
+		E262DF3B24163C9800E1C708 /* BLEAntiHourRotationOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF3A24163C9800E1C708 /* BLEAntiHourRotationOp.swift */; };
+		E262DF3D24163CAA00E1C708 /* BLEHourRotationOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262DF3C24163CAA00E1C708 /* BLEHourRotationOp.swift */; };
 		E265C46024066E8B00D774FA /* BLEVersionTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265C45F24066E8B00D774FA /* BLEVersionTestOp.swift */; };
 		E265C4622406772A00D774FA /* BLEHardVersionTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265C4612406772A00D774FA /* BLEHardVersionTestOp.swift */; };
 		E265C464240677D000D774FA /* BLEDeviceNumTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265C463240677D000D774FA /* BLEDeviceNumTestOp.swift */; };
@@ -277,15 +286,15 @@
 		E28DA6432404C6EC00F0F10B /* BLESearchOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28DA6422404C6EC00F0F10B /* BLESearchOp.swift */; };
 		E28DA6452404ED9200F0F10B /* BaseOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28DA6442404ED9200F0F10B /* BaseOperationQueue.swift */; };
 		E28DA6472404EFEC00F0F10B /* TestOpQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28DA6462404EFEB00F0F10B /* TestOpQueue.swift */; };
-		E29160F124075E4200DE839E /* BLECenterFactoryOnlyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29160F024075E4200DE839E /* BLECenterFactoryOnlyExtension.swift */; };
 		E29160F424076B0900DE839E /* BLEMotorTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29160F324076B0900DE839E /* BLEMotorTestOp.swift */; };
 		E29160F624076DED00DE839E /* BLEFlashTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29160F524076DED00DE839E /* BLEFlashTestOp.swift */; };
 		E29160F824078FAA00DE839E /* BLEHeartRateTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29160F724078FAA00DE839E /* BLEHeartRateTestOp.swift */; };
 		E29160FA240791BA00DE839E /* BLENameTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29160F9240791BA00DE839E /* BLENameTestOp.swift */; };
 		E29737EC2405578200D50A6F /* BLEHidePairOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29737EB2405578200D50A6F /* BLEHidePairOp.swift */; };
-		E29737EE240559F800D50A6F /* BLECenterDeviceCtrlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29737ED240559F800D50A6F /* BLECenterDeviceCtrlExtension.swift */; };
 		E2AAF68D23C6F82500F5435C /* LxFTPRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAF68C23C6F82500F5435C /* LxFTPRequestExtension.swift */; };
 		E2AAF69523C875F000F5435C /* GBKEncodingUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AAF69423C875F000F5435C /* GBKEncodingUtil.m */; };
+		E2C2074724125AF400D2EDCF /* BLEMacAddressTestOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C2074624125AF400D2EDCF /* BLEMacAddressTestOp.swift */; };
+		E2D5888A2419E58F008CCA43 /* FactoryTestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D588892419E58F008CCA43 /* FactoryTestUtil.swift */; };
 		E2DADB7323C4546A00E16A36 /* ModuleSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DADB7123C4546A00E16A36 /* ModuleSelectionVC.swift */; };
 		E2DADB7423C4546A00E16A36 /* ModuleSelectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2DADB7223C4546A00E16A36 /* ModuleSelectionVC.xib */; };
 		E2DADB7723C4604500E16A36 /* SecretCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DADB7523C4604500E16A36 /* SecretCodeVC.swift */; };
@@ -293,12 +302,16 @@
 		E2E10AB6240E879C00A91C3C /* BmobFactoryTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E10AB5240E879C00A91C3C /* BmobFactoryTestHelper.swift */; };
 		E2E10AB8240E893E00A91C3C /* FactoryTestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E10AB7240E893E00A91C3C /* FactoryTestConfig.swift */; };
 		E2E10ABA240E8D6900A91C3C /* FactoryTestGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E10AB9240E8D6900A91C3C /* FactoryTestGroup.swift */; };
-		E2E10ABE240E9E6600A91C3C /* BLEFactoryOnlyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E10ABD240E9E6600A91C3C /* BLEFactoryOnlyProtocol.swift */; };
+		E2E10AC2240F7A7400A91C3C /* FactoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E10AC1240F7A7400A91C3C /* FactoryTestCase.swift */; };
+		E2ED8C882417275000441627 /* BLEResetDeviceOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED8C872417275000441627 /* BLEResetDeviceOp.swift */; };
+		E2ED8C8A24172A7900441627 /* BLEDeviceResetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED8C8924172A7800441627 /* BLEDeviceResetProtocol.swift */; };
+		E2ED8C8C241743E600441627 /* BLEScanGraveOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED8C8B241743E600441627 /* BLEScanGraveOp.swift */; };
+		E2ED8C8F241786A700441627 /* FactoryTestSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED8C8D241786A700441627 /* FactoryTestSettingVC.swift */; };
+		E2ED8C90241786A700441627 /* FactoryTestSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2ED8C8E241786A700441627 /* FactoryTestSettingVC.xib */; };
 		E2F2FB6B23FB838E00CE77F4 /* FactoryTestSecretCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2FB6923FB838E00CE77F4 /* FactoryTestSecretCodeVC.swift */; };
 		E2F2FB6C23FB838E00CE77F4 /* FactoryTestSecretCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F2FB6A23FB838E00CE77F4 /* FactoryTestSecretCodeVC.xib */; };
 		E2F2FB6F23FB90C200CE77F4 /* FactoryTestCaseListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2FB6D23FB90C200CE77F4 /* FactoryTestCaseListVC.swift */; };
 		E2F2FB7023FB90C200CE77F4 /* FactoryTestCaseListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F2FB6E23FB90C200CE77F4 /* FactoryTestCaseListVC.xib */; };
-		E2F2FB7223FBB3D700CE77F4 /* FactoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2FB7123FBB3D700CE77F4 /* FactoryTestCase.swift */; };
 		E2F2FB7723FBD73500CE77F4 /* FactoryTestBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2FB7523FBD73500CE77F4 /* FactoryTestBaseVC.swift */; };
 		E2F2FB7823FBD73500CE77F4 /* FactoryTestBaseVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F2FB7623FBD73500CE77F4 /* FactoryTestBaseVC.xib */; };
 		E2F2FB7B23FC08DD00CE77F4 /* BaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2FB7A23FC08DD00CE77F4 /* BaseOperation.swift */; };
@@ -620,6 +633,15 @@
 		E22E940923A1DE8E00ABBC55 /* BLEDeviceReuqestObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceReuqestObserver.swift; sourceTree = "<group>"; };
 		E22E941223A2460B00ABBC55 /* BLEDeviceHeartbeatObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceHeartbeatObserver.swift; sourceTree = "<group>"; };
 		E22E9A8B239117A700A151C2 /* BLECenterUtilExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterUtilExtension.swift; sourceTree = "<group>"; };
+		E262DF252415EA9E00E1C708 /* BLEBuzzerTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEBuzzerTestOp.swift; sourceTree = "<group>"; };
+		E262DF2724162BB600E1C708 /* BLEAntiMinuteRotationOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAntiMinuteRotationOp.swift; sourceTree = "<group>"; };
+		E262DF302416341200E1C708 /* BLECenterFactoryOnlyExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECenterFactoryOnlyExtension.swift; sourceTree = "<group>"; };
+		E262DF312416341200E1C708 /* BLEFactoryOnlyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEFactoryOnlyProtocol.swift; sourceTree = "<group>"; };
+		E262DF322416341200E1C708 /* BLEDeviceCtrlProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEDeviceCtrlProtocol.swift; sourceTree = "<group>"; };
+		E262DF332416341200E1C708 /* BLEDevicePointerCtrlProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEDevicePointerCtrlProtocol.swift; sourceTree = "<group>"; };
+		E262DF3824163C2100E1C708 /* BLEMinuteRotationOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEMinuteRotationOp.swift; sourceTree = "<group>"; };
+		E262DF3A24163C9800E1C708 /* BLEAntiHourRotationOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAntiHourRotationOp.swift; sourceTree = "<group>"; };
+		E262DF3C24163CAA00E1C708 /* BLEHourRotationOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEHourRotationOp.swift; sourceTree = "<group>"; };
 		E265C45F24066E8B00D774FA /* BLEVersionTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEVersionTestOp.swift; sourceTree = "<group>"; };
 		E265C4612406772A00D774FA /* BLEHardVersionTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEHardVersionTestOp.swift; sourceTree = "<group>"; };
 		E265C463240677D000D774FA /* BLEDeviceNumTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceNumTestOp.swift; sourceTree = "<group>"; };
@@ -627,16 +649,16 @@
 		E28DA6422404C6EC00F0F10B /* BLESearchOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESearchOp.swift; sourceTree = "<group>"; };
 		E28DA6442404ED9200F0F10B /* BaseOperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperationQueue.swift; sourceTree = "<group>"; };
 		E28DA6462404EFEB00F0F10B /* TestOpQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOpQueue.swift; sourceTree = "<group>"; };
-		E29160F024075E4200DE839E /* BLECenterFactoryOnlyExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterFactoryOnlyExtension.swift; sourceTree = "<group>"; };
 		E29160F324076B0900DE839E /* BLEMotorTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEMotorTestOp.swift; sourceTree = "<group>"; };
 		E29160F524076DED00DE839E /* BLEFlashTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEFlashTestOp.swift; sourceTree = "<group>"; };
 		E29160F724078FAA00DE839E /* BLEHeartRateTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEHeartRateTestOp.swift; sourceTree = "<group>"; };
 		E29160F9240791BA00DE839E /* BLENameTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLENameTestOp.swift; sourceTree = "<group>"; };
 		E29737EB2405578200D50A6F /* BLEHidePairOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEHidePairOp.swift; sourceTree = "<group>"; };
-		E29737ED240559F800D50A6F /* BLECenterDeviceCtrlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterDeviceCtrlExtension.swift; sourceTree = "<group>"; };
 		E2AAF68C23C6F82500F5435C /* LxFTPRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LxFTPRequestExtension.swift; sourceTree = "<group>"; };
 		E2AAF69323C875F000F5435C /* GBKEncodingUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBKEncodingUtil.h; sourceTree = "<group>"; };
 		E2AAF69423C875F000F5435C /* GBKEncodingUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBKEncodingUtil.m; sourceTree = "<group>"; };
+		E2C2074624125AF400D2EDCF /* BLEMacAddressTestOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEMacAddressTestOp.swift; sourceTree = "<group>"; };
+		E2D588892419E58F008CCA43 /* FactoryTestUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestUtil.swift; sourceTree = "<group>"; };
 		E2DADB7123C4546A00E16A36 /* ModuleSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleSelectionVC.swift; sourceTree = "<group>"; };
 		E2DADB7223C4546A00E16A36 /* ModuleSelectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModuleSelectionVC.xib; sourceTree = "<group>"; };
 		E2DADB7523C4604500E16A36 /* SecretCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretCodeVC.swift; sourceTree = "<group>"; };
@@ -645,12 +667,16 @@
 		E2E10AB5240E879C00A91C3C /* BmobFactoryTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmobFactoryTestHelper.swift; sourceTree = "<group>"; };
 		E2E10AB7240E893E00A91C3C /* FactoryTestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestConfig.swift; sourceTree = "<group>"; };
 		E2E10AB9240E8D6900A91C3C /* FactoryTestGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestGroup.swift; sourceTree = "<group>"; };
-		E2E10ABD240E9E6600A91C3C /* BLEFactoryOnlyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BLEFactoryOnlyProtocol.swift; path = "BLE-Swift/BLELib/APIs/Refactor/BLEFactoryOnlyProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		E2E10AC1240F7A7400A91C3C /* FactoryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactoryTestCase.swift; sourceTree = "<group>"; };
+		E2ED8C872417275000441627 /* BLEResetDeviceOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEResetDeviceOp.swift; sourceTree = "<group>"; };
+		E2ED8C8924172A7800441627 /* BLEDeviceResetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceResetProtocol.swift; sourceTree = "<group>"; };
+		E2ED8C8B241743E600441627 /* BLEScanGraveOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScanGraveOp.swift; sourceTree = "<group>"; };
+		E2ED8C8D241786A700441627 /* FactoryTestSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestSettingVC.swift; sourceTree = "<group>"; };
+		E2ED8C8E241786A700441627 /* FactoryTestSettingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactoryTestSettingVC.xib; sourceTree = "<group>"; };
 		E2F2FB6923FB838E00CE77F4 /* FactoryTestSecretCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestSecretCodeVC.swift; sourceTree = "<group>"; };
 		E2F2FB6A23FB838E00CE77F4 /* FactoryTestSecretCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactoryTestSecretCodeVC.xib; sourceTree = "<group>"; };
 		E2F2FB6D23FB90C200CE77F4 /* FactoryTestCaseListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestCaseListVC.swift; sourceTree = "<group>"; };
 		E2F2FB6E23FB90C200CE77F4 /* FactoryTestCaseListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactoryTestCaseListVC.xib; sourceTree = "<group>"; };
-		E2F2FB7123FBB3D700CE77F4 /* FactoryTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestCase.swift; sourceTree = "<group>"; };
 		E2F2FB7523FBD73500CE77F4 /* FactoryTestBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTestBaseVC.swift; sourceTree = "<group>"; };
 		E2F2FB7623FBD73500CE77F4 /* FactoryTestBaseVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FactoryTestBaseVC.xib; sourceTree = "<group>"; };
 		E2F2FB7A23FC08DD00CE77F4 /* BaseOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOperation.swift; sourceTree = "<group>"; };
@@ -1020,10 +1046,10 @@
 				2B48749D214F763400AC5841 /* AppDelegate.swift */,
 				E2DADB7123C4546A00E16A36 /* ModuleSelectionVC.swift */,
 				E2DADB7223C4546A00E16A36 /* ModuleSelectionVC.xib */,
+				E2DADB7023C4543600E16A36 /* FactoryOTA */,
 				E2F2FB6623FB81DF00CE77F4 /* FactoryTest */,
 				2B62A56721DF67410051DD38 /* Resources */,
 				2B4874CB214F763B00AC5841 /* BLELib */,
-				E2DADB7023C4543600E16A36 /* FactoryOTA */,
 				2B918D912153363900B0B5DE /* Demos */,
 				2B80C1E421EC34C000FE7BF7 /* LocalizableFiles */,
 				E2DADB7923C46B1800E16A36 /* BLE-Swift-Bridging-Header.h */,
@@ -1703,21 +1729,32 @@
 			path = DeviceRequestObserver;
 			sourceTree = "<group>";
 		};
+		E262DF2F2416341200E1C708 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E262DF302416341200E1C708 /* BLECenterFactoryOnlyExtension.swift */,
+				E262DF312416341200E1C708 /* BLEFactoryOnlyProtocol.swift */,
+				E262DF322416341200E1C708 /* BLEDeviceCtrlProtocol.swift */,
+				E262DF332416341200E1C708 /* BLEDevicePointerCtrlProtocol.swift */,
+				E2ED8C8924172A7800441627 /* BLEDeviceResetProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		E29160EF24075CE600DE839E /* Refactor */ = {
 			isa = PBXGroup;
 			children = (
-				E2E10ABC240E9E3800A91C3C /* Protocols */,
-				E29737ED240559F800D50A6F /* BLECenterDeviceCtrlExtension.swift */,
-				E29160F024075E4200DE839E /* BLECenterFactoryOnlyExtension.swift */,
+				E262DF2F2416341200E1C708 /* Protocols */,
 			);
 			path = Refactor;
 			sourceTree = "<group>";
 		};
-		E29160FB2407BA0500DE839E /* TestVC */ = {
+		E29160FB2407BA0500DE839E /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				E2D588892419E58F008CCA43 /* FactoryTestUtil.swift */,
 			);
-			path = TestVC;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		E2AAF69223C875B100F5435C /* GBKEncodingUtil */ = {
@@ -1751,16 +1788,9 @@
 				E2E10AB5240E879C00A91C3C /* BmobFactoryTestHelper.swift */,
 				E2E10AB7240E893E00A91C3C /* FactoryTestConfig.swift */,
 				E2E10AB9240E8D6900A91C3C /* FactoryTestGroup.swift */,
+				E2E10AC1240F7A7400A91C3C /* FactoryTestCase.swift */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		E2E10ABC240E9E3800A91C3C /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				E2E10ABD240E9E6600A91C3C /* BLEFactoryOnlyProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		E2F2FB6623FB81DF00CE77F4 /* FactoryTest */ = {
@@ -1773,8 +1803,9 @@
 				E2F2FB6E23FB90C200CE77F4 /* FactoryTestCaseListVC.xib */,
 				E2F2FB7523FBD73500CE77F4 /* FactoryTestBaseVC.swift */,
 				E2F2FB7623FBD73500CE77F4 /* FactoryTestBaseVC.xib */,
-				E2F2FB7123FBB3D700CE77F4 /* FactoryTestCase.swift */,
-				E29160FB2407BA0500DE839E /* TestVC */,
+				E2ED8C8D241786A700441627 /* FactoryTestSettingVC.swift */,
+				E2ED8C8E241786A700441627 /* FactoryTestSettingVC.xib */,
+				E29160FB2407BA0500DE839E /* Util */,
 				E2F2FB7923FC08BA00CE77F4 /* Operations */,
 			);
 			path = FactoryTest;
@@ -1797,6 +1828,14 @@
 				E29160F524076DED00DE839E /* BLEFlashTestOp.swift */,
 				E29160F724078FAA00DE839E /* BLEHeartRateTestOp.swift */,
 				E29160F9240791BA00DE839E /* BLENameTestOp.swift */,
+				E2C2074624125AF400D2EDCF /* BLEMacAddressTestOp.swift */,
+				E262DF252415EA9E00E1C708 /* BLEBuzzerTestOp.swift */,
+				E262DF2724162BB600E1C708 /* BLEAntiMinuteRotationOp.swift */,
+				E262DF3824163C2100E1C708 /* BLEMinuteRotationOp.swift */,
+				E262DF3A24163C9800E1C708 /* BLEAntiHourRotationOp.swift */,
+				E262DF3C24163CAA00E1C708 /* BLEHourRotationOp.swift */,
+				E2ED8C872417275000441627 /* BLEResetDeviceOp.swift */,
+				E2ED8C8B241743E600441627 /* BLEScanGraveOp.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -1990,6 +2029,7 @@
 				2B56A16B21F708A90073E2A7 /* ZdOtaResultCell.xib in Resources */,
 				2B56A15521F6F0B50073E2A7 /* ToolManagerVC.xib in Resources */,
 				2B4AB46A21F174D200EF5327 /* ReturnFormatVC.xib in Resources */,
+				E2ED8C90241786A700441627 /* FactoryTestSettingVC.xib in Resources */,
 				2B3657B421DDA15F0070E7AB /* logo.png in Resources */,
 				2B36579521DCC6190070E7AB /* ToolsViewController.xib in Resources */,
 				2B56A15921F6F1060073E2A7 /* AppSettingVC.xib in Resources */,
@@ -2114,12 +2154,15 @@
 				2B2E27412172E76500726FC7 /* BLEArrayExtensions.swift in Sources */,
 				2BEC5D702174870100E0902B /* BLECenterDeviceExtension.swift in Sources */,
 				2B45B95F21EDF5C80058E137 /* DeviceTestUnit.swift in Sources */,
+				E262DF3D24163CAA00E1C708 /* BLEHourRotationOp.swift in Sources */,
 				2B76006721F30EDC006B4C63 /* ZdOtaFirmwaresVC.swift in Sources */,
 				2BEDD5B8223240720085A937 /* EditEnumVC.swift in Sources */,
 				2B62A58421E04DB70051DD38 /* ProtocolMenuDetailCell.swift in Sources */,
 				2BA23FA221E4B5FF00EF1B77 /* FirmwareTypeVC.swift in Sources */,
 				2BE7705021E4A54C00FD6374 /* FirmwareSelectVC.swift in Sources */,
+				E262DF372416341300E1C708 /* BLEDevicePointerCtrlProtocol.swift in Sources */,
 				2B56A16A21F708A90073E2A7 /* ZdOtaResultCell.swift in Sources */,
+				E262DF342416341300E1C708 /* BLECenterFactoryOnlyExtension.swift in Sources */,
 				2B3657A521DCCD600070E7AB /* Functions.swift in Sources */,
 				2B57031F224867C10008208E /* BLECenterSportExtension.swift in Sources */,
 				2B54064A225E1E5A00B86EFF /* DeviceTestSubjectView.swift in Sources */,
@@ -2131,6 +2174,7 @@
 				2B62A58B21E087E60051DD38 /* ResultDisplayCell.swift in Sources */,
 				2B62A57221DF68840051DD38 /* Param.swift in Sources */,
 				2B3657B621DDA83E0070E7AB /* ConnectBaseVC.swift in Sources */,
+				E2E10AC2240F7A7400A91C3C /* FactoryTestCase.swift in Sources */,
 				2B3147392236852E0018495D /* CircleTestGroupView.swift in Sources */,
 				2B62A56021DEF3DB0051DD38 /* DeviceInfo.swift in Sources */,
 				2BEC5D6C21746A5A00E0902B /* BLECenterCommonExtension.swift in Sources */,
@@ -2140,6 +2184,7 @@
 				2B44C74D21EEE32D0037F5C3 /* CmdInputLayout.swift in Sources */,
 				2B5417E42244EBD700C9F5DD /* SleepVC.swift in Sources */,
 				2BE7704421E4953100FD6374 /* OtaService.swift in Sources */,
+				E2ED8C8C241743E600441627 /* BLEScanGraveOp.swift in Sources */,
 				2BE7705421E4A65A00FD6374 /* FirmwareSelectCell.swift in Sources */,
 				E29160F624076DED00DE839E /* BLEFlashTestOp.swift in Sources */,
 				2B3C1C40218FEB37007F7DC6 /* DeviceCell.swift in Sources */,
@@ -2160,6 +2205,7 @@
 				2BD12FF2221A8B1D00EDC488 /* NetworkAPIs.swift in Sources */,
 				E22CD2AF23FD214E00930CB8 /* BLEConnectOp.swift in Sources */,
 				2B4AB47021F1854000EF5327 /* TestGroupLayout.swift in Sources */,
+				E262DF3924163C2100E1C708 /* BLEMinuteRotationOp.swift in Sources */,
 				2B4874CD214F766300AC5841 /* BLECenter.swift in Sources */,
 				2B3657A321DCC7020070E7AB /* LYNavigationController.swift in Sources */,
 				E2F2FB7B23FC08DD00CE77F4 /* BaseOperation.swift in Sources */,
@@ -2187,18 +2233,19 @@
 				2B5832E22175832200259593 /* StringExtensions.swift in Sources */,
 				2BE7CE77225C443A00A60DDA /* WatchInfoEditVC.swift in Sources */,
 				E29160FA240791BA00DE839E /* BLENameTestOp.swift in Sources */,
+				E2ED8C8A24172A7900441627 /* BLEDeviceResetProtocol.swift in Sources */,
 				E2F2FB6B23FB838E00CE77F4 /* FactoryTestSecretCodeVC.swift in Sources */,
 				2BEDD5A4222F6A440085A937 /* ParamsInputModalView.swift in Sources */,
 				2B4AB46921F174D200EF5327 /* ReturnFormatVC.swift in Sources */,
 				2B56A15421F6F0B50073E2A7 /* ToolManagerVC.swift in Sources */,
 				E2AAF69523C875F000F5435C /* GBKEncodingUtil.m in Sources */,
 				2B57032D2248C5500008208E /* Sleep.swift in Sources */,
-				E2E10ABE240E9E6600A91C3C /* BLEFactoryOnlyProtocol.swift in Sources */,
 				2B5832F4217704CD00259593 /* TableMenu.swift in Sources */,
-				E29737EE240559F800D50A6F /* BLECenterDeviceCtrlExtension.swift in Sources */,
 				2B86063D2238D1E400728B0B /* DeviceTestConfigsVC.swift in Sources */,
 				E265C4622406772A00D774FA /* BLEHardVersionTestOp.swift in Sources */,
 				E2F45FD023CDBC3D006B34DC /* FactoryOTAExecuter.swift in Sources */,
+				E2C2074724125AF400D2EDCF /* BLEMacAddressTestOp.swift in Sources */,
+				E2D5888A2419E58F008CCA43 /* FactoryTestUtil.swift in Sources */,
 				2B62A57C21E042680051DD38 /* ProtocolMenuCell.swift in Sources */,
 				2B36578721DCA42E0070E7AB /* BLEDataParser.swift in Sources */,
 				2B62A55921DDD84D0051DD38 /* RefreshBtn.swift in Sources */,
@@ -2209,10 +2256,12 @@
 				2B45442021F59A1100FC3E91 /* ZdOtaTaskCell.swift in Sources */,
 				2B3657B021DCD54B0070E7AB /* SlideMenuController.swift in Sources */,
 				2B45441921F55AF100FC3E91 /* ZdOtaDisplayVC.swift in Sources */,
+				E262DF362416341300E1C708 /* BLEDeviceCtrlProtocol.swift in Sources */,
 				2B4AB47221F2BAFA00EF5327 /* NumberInputView.swift in Sources */,
 				2B56A15821F6F1060073E2A7 /* AppSettingVC.swift in Sources */,
 				2B7AB99021EECE5900D01E39 /* AddDeviceTestVC.swift in Sources */,
 				2B314736223639840018495D /* AddDeviceCircleGroupVC.swift in Sources */,
+				E262DF262415EA9E00E1C708 /* BLEBuzzerTestOp.swift in Sources */,
 				2BEDD5AB22310CA80085A937 /* NumberInputModalView.swift in Sources */,
 				2B80C1EC21EC35D600FE7BF7 /* PrefixAddVC.swift in Sources */,
 				E2F2FB6F23FB90C200CE77F4 /* FactoryTestCaseListVC.swift in Sources */,
@@ -2221,7 +2270,6 @@
 				2B9DD97B21E745AD00C215E5 /* OtaTaskTipView.swift in Sources */,
 				2B45B95D21EDF5A50058E137 /* DeviceTestGroup.swift in Sources */,
 				E2AAF68D23C6F82500F5435C /* LxFTPRequestExtension.swift in Sources */,
-				E29160F124075E4200DE839E /* BLECenterFactoryOnlyExtension.swift in Sources */,
 				2B45B94E21EDABE90058E137 /* DeviceProduct.swift in Sources */,
 				2B4AB46121F01D0500EF5327 /* CmdTextField.swift in Sources */,
 				E29160F424076B0900DE839E /* BLEMotorTestOp.swift in Sources */,
@@ -2240,6 +2288,7 @@
 				2B62A57621DF6B730051DD38 /* ProtocolJsonParser.swift in Sources */,
 				2B2F8A78222635A10078D69F /* TestConfigCell.swift in Sources */,
 				E28DA6472404EFEC00F0F10B /* TestOpQueue.swift in Sources */,
+				E262DF352416341300E1C708 /* BLEFactoryOnlyProtocol.swift in Sources */,
 				2B314731223635C30018495D /* CircleTest.swift in Sources */,
 				2BE7704821E4980700FD6374 /* OtaDataModel.swift in Sources */,
 				E265C46024066E8B00D774FA /* BLEVersionTestOp.swift in Sources */,
@@ -2248,6 +2297,7 @@
 				2B5417E02244EBCD00C9F5DD /* HeartRateVC.swift in Sources */,
 				2B44C74F21EEFAEE0037F5C3 /* CmdUnit.swift in Sources */,
 				2B3657B921DDB05C0070E7AB /* LeftDeviceCell.swift in Sources */,
+				E2ED8C8F241786A700441627 /* FactoryTestSettingVC.swift in Sources */,
 				2BB4B6F121E9E6A600F22268 /* TaskDetailCell.swift in Sources */,
 				2B54065422617EC000B86EFF /* Role.swift in Sources */,
 				2B7C923A221FE70E005C905A /* ForgetPwdVC.swift in Sources */,
@@ -2277,7 +2327,6 @@
 				2B56A14421F6EBAF0073E2A7 /* MenuRow.swift in Sources */,
 				2B56A14221F6EBA50073E2A7 /* MenuSection.swift in Sources */,
 				2B2E27472173265800726FC7 /* BaseViewController.swift in Sources */,
-				E2F2FB7223FBB3D700CE77F4 /* FactoryTestCase.swift in Sources */,
 				2BFAF610216F2089003AEAD6 /* BLEDataCenter.swift in Sources */,
 				2B9DD98121E82A1100C215E5 /* OtaTask.swift in Sources */,
 				2B56A16D21F70FB90073E2A7 /* VoiceSpeaker.swift in Sources */,
@@ -2287,10 +2336,12 @@
 				2B2F8A812226C0EA0078D69F /* ToolsObjCell.swift in Sources */,
 				2B5703262248B13F0008208E /* SportDetailVC.swift in Sources */,
 				2B9DD96521E7145B00C215E5 /* PrefixSelectVC.swift in Sources */,
+				E2ED8C882417275000441627 /* BLEResetDeviceOp.swift in Sources */,
 				2B5832E0217573E000259593 /* UIDefines.swift in Sources */,
 				E2F45FC023C96B0B006B34DC /* UnzipFileUtils.swift in Sources */,
 				2B9DD97421E729DD00C215E5 /* BLECenterExtensions.swift in Sources */,
 				2B45441C21F5996A00FC3E91 /* ZdOtaTask.swift in Sources */,
+				E262DF3B24163C9800E1C708 /* BLEAntiHourRotationOp.swift in Sources */,
 				2B31472822362C130018495D /* StressTestingVC.swift in Sources */,
 				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
 				2BA3B58A21FC4AFE0084E291 /* DeviceResponseLogView.swift in Sources */,
@@ -2299,6 +2350,7 @@
 				2BB4B6ED21E9C21C00F22268 /* OtaTaskDetailVC.swift in Sources */,
 				2BE7704021E488C400FD6374 /* Firmware.swift in Sources */,
 				2B314733223638AA0018495D /* CircleGroup.swift in Sources */,
+				E262DF2824162BB600E1C708 /* BLEAntiMinuteRotationOp.swift in Sources */,
 				2B9DD97D21E7476A00C215E5 /* OtaManager.swift in Sources */,
 				2B48749E214F763400AC5841 /* AppDelegate.swift in Sources */,
 				E29737EC2405578200D50A6F /* BLEHidePairOp.swift in Sources */,

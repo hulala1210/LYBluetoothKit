@@ -41,9 +41,8 @@ class SecretCodeVC: BaseViewController {
         nextStepButton.layer.borderColor = nextStepButton.tintColor.cgColor
         
         // Do any additional setup after loading the view.
-        Bmob.register(withAppKey: "5cde76787542587a7ce90b2b54ef1f97")
         self.setNavRightButton(text: "手动校验", sel: #selector(navRightButtonAction))
-        secretCodeTextField.text = "SlimTesH"
+//        secretCodeTextField.text = "SlimTesH"
 
     }
     

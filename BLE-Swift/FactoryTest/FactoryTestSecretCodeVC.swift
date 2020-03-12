@@ -12,13 +12,15 @@ class FactoryTestSecretCodeVC: BaseViewController {
     
     @IBOutlet weak var secretCodeTextField: UITextField!
     
+    var testGroupList:Array<FactoryTestGroup> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.title = "选择测试套装"
         self.setNavRightButton(text: "手动校验", sel: #selector(navRightButtonAction))
-        secretCodeTextField.text = "123456"
+        secretCodeTextField.text = "SlimTest"
     }
 
     @objc func navRightButtonAction() {
@@ -32,15 +34,32 @@ class FactoryTestSecretCodeVC: BaseViewController {
     }
     
     private func queryTestInfo() {
-        let vc = FactoryTestCaseListVC()
         
-        for _ in 0...6 {
-            
-            let testCase = FactoryTestCase.init()
-            vc.testCaseSuit.append(testCase)
+        if secretCodeTextField.text == nil || (secretCodeTextField.text!.count) == 0 {
+            return
         }
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.startLoading(nil)
+        
+        BmobFactoryTestHelper.queryTestConfig(secretCode: secretCodeTextField.text!) { (config, error) in
+            self.stopLoading()
+            if error != nil {
+                self.showError(error?.localizedDescription)
+            }
+            else {
+                BmobFactoryTestHelper.queryTestGroups(groupSerial: config!.testGroupsSerial) { (testGroups, groupError) in
+                    if groupError != nil || testGroups?.count == 0 {
+                        self.showError(groupError?.localizedDescription)
+                    }
+                    else {
+                        let vc = FactoryTestCaseListVC()
+                        vc.testCaseSuit = testGroups!
+                        vc.testConfig = config
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            }
+        }
     }
     
     /*

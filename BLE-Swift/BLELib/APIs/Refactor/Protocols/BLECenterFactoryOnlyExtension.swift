@@ -7,6 +7,10 @@
 //
 
 import Foundation
-extension BLECenter:BLEFactoryOnlyProtocol {
-    
+extension BLECenter:BLEFactoryOnlyProtocol,
+    BLEDeviceCtrlProtocol,
+    BLEDevicePointerCtrlProtocol,
+    BLEDeviceResetProtocol
+{
+     
 }

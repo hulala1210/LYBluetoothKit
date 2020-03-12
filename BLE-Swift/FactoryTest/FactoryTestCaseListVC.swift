@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import PopupDialog
 
 class FactoryTestCaseListVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     let factoryTestCaseCellIdentifier:String = "FactoryTestCaseCellMark"
     
+    var testCaseSuit:Array<FactoryTestGroup> = []
+    
+    var testConfig:FactoryTestConfig? = nil
+    
     @IBOutlet weak var tableView: UITableView!
-
-    var testCaseSuit:Array<FactoryTestCase> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +25,42 @@ class FactoryTestCaseListVC: BaseViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: factoryTestCaseCellIdentifier)
         self.tableView.tableFooterView = UIView.init()
+        
+        self.setNavRightButton(text: "Setting", sel: #selector(settingButtonAction))
+
     }
 
+    @objc private func settingButtonAction() {
+
+        let settingVC = FactoryTestSettingVC(nibName: "FactoryTestSettingVC", bundle: nil)
+
+        let popup = PopupDialog(viewController: settingVC,
+                                buttonAlignment: .horizontal,
+                                transitionStyle: .bounceUp,
+                                preferredWidth: 340,
+                                tapGestureDismissal: false,
+                                panGestureDismissal: true,
+                                hideStatusBar: true) {
+        }
+        
+        // Create first button
+        let buttonOne = CancelButton(title: "CANCEL", height: 60) {
+//            self.label.text = "You canceled the rating dialog"
+        }
+
+        // Create second button
+        let buttonTwo = DefaultButton(title: "SAVE", height: 60) {
+//            self.label.text = "You rated \(ratingVC.cosmosStarRating.rating) stars"
+            settingVC.saveVersionStandard()
+        }
+
+        // Add buttons to dialog
+        popup.addButtons([buttonOne, buttonTwo])
+
+        // Present dialog
+        present(popup, animated: true, completion: nil)
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return testCaseSuit.count;
@@ -36,22 +73,32 @@ class FactoryTestCaseListVC: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.text = String(indexPath.row)
+        let testGroup = testCaseSuit[indexPath.row]
+
+        cell.textLabel?.text = String(indexPath.row + 1) + " " + testGroup.groupName!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let testCase = testCaseSuit[indexPath.row]
-        
-        switch testCase.type {
-        case FinishedProductTestCaseType.normal: break
-            
-        default: break
-            
+        let testGroup = testCaseSuit[indexPath.row]
+        self.startLoading(nil)
+
+        BmobFactoryTestHelper.queryTestCases(casesSerial: testGroup.testCasesSerial) { (testCases, error) in
+            self.stopLoading()
+            if error != nil {
+                self.showError(error?.localizedDescription)
+            }
+            else {
+                
+                if testCases != nil {
+                    let vc = FactoryTestBaseVC.init()
+                    vc.testCases = testCases!
+                    vc.testConfig = self.testConfig
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+            }
         }
         
-        let vc = FactoryTestBaseVC.init()
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     /*

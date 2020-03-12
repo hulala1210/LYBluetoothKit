@@ -12,12 +12,20 @@ class BLEHidePairOp: BaseOperation {
     override func mainAction() {
         self.isTaskExecuting = true
 
+        if self.isCancelled {
+            return
+        }
+        
         let queue:TestOpQueue = self.queue as! TestOpQueue
 
         let _ = BLECenter.shared.cancelPairCommand(callback: { (success, error) in
             
-            if error != nil {
-                
+            if self.isCancelled {
+                return
+            }
+            
+            if error == nil {
+                print("连接成功")
             }
             else {
                 if self.failedBlock != nil {
@@ -25,9 +33,8 @@ class BLEHidePairOp: BaseOperation {
                 }
             }
             
-            self.isTaskExecuting = false
-            self.isTaskFinished = true
-            
+            self.done()
+
         }, toDeviceName: queue.device!.name)
     }
 }

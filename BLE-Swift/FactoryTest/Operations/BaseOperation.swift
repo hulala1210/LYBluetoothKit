@@ -54,14 +54,15 @@ class BaseOperation: Operation {
     // MARK: - For Override 
     open func mainAction() {
         
-        defer {
-            self.isTaskFinished = true
-        }
+        print("\(self) begin" )
         
-        if self.isCancelled {
-            return
-        }
+    }
+    
+    @objc open func done() {
         
+        print("\(self) done" )
         
+        isTaskExecuting = false
+        isTaskFinished = true
     }
 }

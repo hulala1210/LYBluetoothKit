@@ -7,14 +7,36 @@
 //
 
 import UIKit
-import SwiftScanner
+
+
+public enum FWVersionKey: String, Codable {
+    case tlr = "TE"
+    case apollo = "A"
+    case nordic = "N"
+    case heartRate = "H"
+    case touch = "T"
+    case picture = "R"
+    case fresscale = "K"
+    case build = "B"
+}
 
 class BLEVersionTestOp: BaseOperation {
     override func mainAction() {
         super.mainAction()
+        
+        if self.isCancelled {
+            return
+        }
+        
         self.isTaskExecuting = true
         let queue:TestOpQueue = self.queue as! TestOpQueue
+        queue.message = queue.message + "\n开始检查设备版本号"
+
         let _ = BLECenter.shared.getFirmwareVersionWithBuild(stringCallback: { (versionString, error) in
+            
+            if self.isCancelled {
+                return
+            }
             
             if versionString == nil || error != nil {
                 if self.failedBlock != nil {
@@ -24,38 +46,35 @@ class BLEVersionTestOp: BaseOperation {
             else {
                 queue.message = queue.message + "\n设备版本号:\(versionString!)"
                 
-                let versionDict:Dictionary<String,Double> = self.parseVersion(versionString: versionString)
+                let versionDict:Dictionary<String,Double> = parseVersion(versionString: versionString)
                 print(versionDict)
+                
+                let standardFWVersion = UserDefaults.standard.double(forKey: FactoryFirmwareVersionCodeCacheKey)
+                let standardBuildVersion = UserDefaults.standard.integer(forKey: FactoryBuildVersionCodeCacheKey)
+//                let standardHardwareVersion = UserDefaults.standard.double(forKey: FactoryHardwareVersionCodeCacheKey)
+
+                var fwVersion:Double = versionDict[FWVersionKey.tlr.rawValue] ?? 0.0
+                if fwVersion == 0.0 {
+                    fwVersion = versionDict[FWVersionKey.apollo.rawValue] ?? 0.0
+                }
+                else if fwVersion == 0.0 {
+                    fwVersion = versionDict[FWVersionKey.nordic.rawValue] ?? 0.0
+                }
+                
+                let buildFWVersion = versionDict[FWVersionKey.build.rawValue] ?? 0.0
+                
+                if (fwVersion != standardFWVersion || Int(buildFWVersion * 10) != standardBuildVersion) {
+                    queue.message = queue.message + "\n设备版本号比对不符"
+                    queue.badMessage = queue.badMessage + "\n设备版本号比对不符"
+                }
+                else {
+                    queue.message = queue.message + "\n设备版本号比对正常"
+                }
+
             }
             
-            self.isTaskExecuting = false
-            self.isTaskFinished = true
+            self.done()
         }, toDeviceName: queue.device?.name)
     }
-    
-    private func parseVersion(versionString:String!) -> Dictionary<String,Double> {
-        
-        var version:String! = versionString
-        
-        var scanner = StringScanner(version)
-        
-        var result = Dictionary<String,Double>.init()
-        
-        while version.count > 0 {
-            do {
-                let partialString = try scanner.scan(upTo: CharacterSet.decimalDigits)
-                let versionCode = try scanner.scanFloat()
-                
-                result[partialString!] = Double(versionCode)
-                
-                version = String(versionString.suffix(from: scanner.endIndex))
-                scanner = StringScanner(version)
-                
-            } catch let error {
-                print(error)
-            }
-        }
-     
-        return result
-    }
+
 }

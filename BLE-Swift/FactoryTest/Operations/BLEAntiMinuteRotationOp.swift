@@ -39,7 +39,7 @@ class BLEAntiMinuteRotationOp: BaseOperation {
                 queue.message = queue.message + "\n分针逆转一圈命令发送失败"
             }
 
-            DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 8) {
                 self.done()
             }
             

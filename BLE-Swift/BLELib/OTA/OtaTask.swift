@@ -336,6 +336,11 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         if checkIsCancel() {
             return
         }
+        
+        if data[0] == 02 {
+            print("TES")
+        }
+        
         print("发送（\(UUID.otaNotifyC)）:\(data.hexEncodedString())")
         _ = device.write(data, characteristicUUID: UUID.otaNotifyC)
     }
@@ -367,6 +372,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
         progressCallback = nil
         finishCallback = nil
         otaDatas.removeAll()
+        NotificationCenter.default.removeObserver(self, name: BLEInnerNotification.deviceDataUpdate, object: nil)
         removeTimer()
     }
     
@@ -396,7 +402,7 @@ public class OtaTask: NSObject, BLEDeviceDelegate {
     }
     
     private func otaDeviceDataComes(data: Data) {
-//        print("来数据了：\(data.hexEncodedString())")
+        print("来数据了：\(data.hexEncodedString())")
         removeTimer()
         // 命令
         let cmd = data.bytes[0]

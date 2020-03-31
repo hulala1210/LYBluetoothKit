@@ -85,7 +85,12 @@ class FTPHelper: NSObject {
         
         // 通过KVC绕过set方法里的验证合法性，直接设置。
         request?.setValue(serverURL, forKey: "_serverURL");
-        request?.localFileURL = URL.init(fileURLWithPath: localPath)
+        
+        let localeURL = URL.init(fileURLWithPath: localPath)
+        request?.setValue(localeURL, forKey: "_localFileURL");
+
+//        request?.localFileURL = URL.init(fileURLWithPath: localPath)
+        
         
         request?.username = "chenyanlin"
         request?.password = "cyl551"

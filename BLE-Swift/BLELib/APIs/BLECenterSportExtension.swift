@@ -59,7 +59,7 @@ extension BLECenter {
                     let time = d[2...5].uint
                     let step = d[6...9].uint
                     let cal = d[10...13].uint
-                    let dis = d[14...24].uint
+                    let dis = d[14...17].uint
                     let du = d[18...21].uint
                     
                     let sport = Sport(index: index, time: TimeInterval(time), step: step, calorie: cal, distance: dis, duration: du)

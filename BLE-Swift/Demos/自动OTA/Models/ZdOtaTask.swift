@@ -72,16 +72,7 @@ class ZdOtaTask: Equatable {
         
         for fm in config.firmwares {
             
-//            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
             let path = fm.path
-            
-//            do {
-//                var data = try Data(contentsOf: URL(fileURLWithPath: path))
-//                let dm = OtaDataModel(type: fm.type, data: data)
-//                otaDatas.append(dm)
-//                data.removeAll()
-//            }
-//            catch {}
             
             let data = StorageUtils.getData(atPath: path)
             
@@ -126,25 +117,21 @@ class ZdOtaTask: Equatable {
         
         let finishBlock = {(bool: Bool, error: BLEError?) in
             if error != nil {
-                            weakSelf?.state = .fail
-                            weakSelf?.error = error
-                            weakSelf?.endTime = Date().timeIntervalSince1970
-                            
-                            weakSelf?.finishCallback?(bool, error)
-                            
-                            NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
-                        } else {
-                            if let bool = weakSelf?.config.needReset, bool == true {
-                                weakSelf?.startResetDevice()
-                            } else {
-                                weakSelf?.otaSuccess(isReset: false)
-                            }
-            //                if self.config.needReset {
-            //                    self.startResetDevice()
-            //                } else {
-            //                    self.otaSuccess()
-            //                }
-                        }
+                weakSelf?.state = .fail
+                weakSelf?.error = error
+                weakSelf?.endTime = Date().timeIntervalSince1970
+                
+                weakSelf?.finishCallback?(bool, error)
+                
+                NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
+            }
+            else {
+                if let bool = weakSelf?.config.needReset, bool == true && (self.config.blePrefixAfterOTA == nil || self.config.blePrefixAfterOTA!.count == 0) {
+                    weakSelf?.startResetDevice()
+                } else {
+                    weakSelf?.otaSuccess(isReset: false)
+                }
+            }
         }
         
         
@@ -174,37 +161,7 @@ class ZdOtaTask: Equatable {
                 finishBlock(bool, error)
             })
         }
-        
-//        otaTask = OtaManager.shared.startOta(device: device, otaBleName: otaBleName, otaDatas: otaDatas, readyCallback: {
-//            NotificationCenter.default.post(name: kZdOtaTaskReady, object: nil, userInfo: nil)
-//        }, progressCallback: { (progress) in
-//
-//            weakSelf?.progressCallback?(progress)
-//
-//            NotificationCenter.default.post(name: kZdOtaTaskProgressUpdate, object: nil, userInfo: ["progress": progress, "task": self])
-//        }, finishCallback: { (bool, error) in
-//
-//            if error != nil {
-//                weakSelf?.state = .fail
-//                weakSelf?.error = error
-//                weakSelf?.endTime = Date().timeIntervalSince1970
-//
-//                weakSelf?.finishCallback?(bool, error)
-//
-//                NotificationCenter.default.post(name: kZdOtaTaskFailed, object: nil, userInfo: ["error": error!, "task": self])
-//            } else {
-//                if let bool = weakSelf?.config.needReset, bool == true {
-//                    weakSelf?.startResetDevice()
-//                } else {
-//                    weakSelf?.otaSuccess(isReset: false)
-//                }
-////                if self.config.needReset {
-////                    self.startResetDevice()
-////                } else {
-////                    self.otaSuccess()
-////                }
-//            }
-//        })
+
         otaTask!.config = config
     }
     

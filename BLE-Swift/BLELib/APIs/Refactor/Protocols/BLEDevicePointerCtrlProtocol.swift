@@ -20,17 +20,35 @@ enum LYBCDirection:UInt8, Codable {
     case expand
 }
 
+enum LYBCClockEvent:UInt8, Codable {
+    case stop = 0
+    case move
+    case unLock
+    case lock
+    case unLockAndSetParams
+    case quitCalibration
+}
+
 protocol BLEDevicePointerCtrlProtocol {
+    func sendClockEvent(pointer:LYBCClockPointer, direction:LYBCDirection, event:LYBCClockEvent, callback:BoolCallback?, toDeviceName deviceName:String) -> BLETask?
+    
     func pointerRotation(pointer:LYBCClockPointer, direction:LYBCDirection, angle:UInt16, callback:BoolCallback?, toDeviceName deviceName:String) -> BLETask?
+        
 }
 
 extension BLEDevicePointerCtrlProtocol {
+    
+    func sendClockEvent(pointer:LYBCClockPointer, direction:LYBCDirection, event:LYBCClockEvent, callback:BoolCallback?, toDeviceName deviceName:String) -> BLETask? {
+        
+        let data = Data(bytes: [0x6F,0xB8,0x71,0x03,0x00,pointer.rawValue,direction.rawValue,event.rawValue,0x8F])
+        return BLECenter.shared.send(data: data, boolCallback: callback, toDeviceName: deviceName)
+    }
+    
     func pointerRotation(pointer:LYBCClockPointer, direction:LYBCDirection, angle:UInt16, callback:BoolCallback?, toDeviceName deviceName:String) -> BLETask? {
         
-//        let degree:Int = 360
         let degreeData = angle.data(byteCount: 2)
         
         let data = Data(bytes: [0x6F,0xB6,0x71,0x04,0x00,pointer.rawValue,direction.rawValue,degreeData[0],degreeData[1],0x8F])
-           return BLECenter.shared.send(data: data, boolCallback: callback, toDeviceName: deviceName)
+        return BLECenter.shared.send(data: data, boolCallback: callback, toDeviceName: deviceName)
     }
 }

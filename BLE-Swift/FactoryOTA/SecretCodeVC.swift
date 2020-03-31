@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 extension String {
 
@@ -112,6 +113,25 @@ class SecretCodeVC: BaseViewController {
             queryOTAInfo()
         }
         
+    }
+    
+    @IBAction func helpButtonAction(_ sender: UIButton) {
+        
+        self.alert(msg: "请打开系统音量",confirmText:"知道了", confirmSel: #selector(avPlayerPush), cancelText: nil, cancelSel: nil)
+        
+    }
+    
+    @objc private func avPlayerPush() {
+        let playerVC = AVPlayerViewController()
+        let avURL = URL.init(fileURLWithPath: Bundle.main.path(forResource: "course", ofType: "mov")!)
+        let player = AVPlayer.init(url: avURL)
+        playerVC.player = player
+        playerVC.showsPlaybackControls = true
+        
+        navigationController?.pushViewController(playerVC, animated: true)
+        if (playerVC.isReadyForDisplay) {
+            playerVC.player?.play();
+        }
     }
     
     private func pushIntoAutoOTAVC(firmwaresDirectory:String!) {
@@ -239,20 +259,33 @@ class SecretCodeVC: BaseViewController {
         // 查找
         self.startLoading("正在校验")
         secretCodeTextField.resignFirstResponder()
+        self.nextStepButton.isHidden = true
         BmobFactoryOTAHelper.queryOTAConfig(secretCode: secretCodeTextField.text!) { (results:Array<BmobFactoryOTAInfoModel>?, error:Error?) in
             
             self.stopLoading()
+            
+            if error != nil {
+                self.showError(error?.localizedDescription)
+                return
+            }
             
             if (results != nil) {
                 if results!.count == 1 {
                     // 正常
     //                        let ftpPath = "ftp://172.16.0.5/研发专用/3.3plus/P03A/Testing/APP/2019/1.0.6(23)/P03A_AT1.0.6(23).txt"
                     
-                    self.nextStepButton.isHidden = false
                     self.otaInfoConfig = results![0]
                     
-                    let suitInfoString = "客户名:\(self.otaInfoConfig!.customerName!) \n产品名:\(self.otaInfoConfig!.productName!) \n序号:\(self.otaInfoConfig!.otaSerialNumber!) \n固件版本:\(self.otaInfoConfig!.firmwareVersion ?? "未填写")"
-                    self.otaSuitInfoTextView.text = suitInfoString
+                    let errorMessage = self.checkConfigError(config: self.otaInfoConfig)
+                    if errorMessage == nil {
+                        self.nextStepButton.isHidden = false
+                        let suitInfoString = "客户名:\(self.otaInfoConfig!.customerName!) \n产品名:\(self.otaInfoConfig!.productName!) \n序号:\(self.otaInfoConfig!.otaSerialNumber!) \n固件版本:\(self.otaInfoConfig!.firmwareVersion ?? "未填写")"
+                        self.otaSuitInfoTextView.text = suitInfoString
+                    }
+                    else {
+                        self.alert(msg: errorMessage!, confirmText:"知道了", confirmSel: nil, cancelText: nil, cancelSel: nil)
+                    }
+                    
                     
                 }
                 else if results!.count > 1 {
@@ -272,10 +305,55 @@ class SecretCodeVC: BaseViewController {
         }
     }
     
+    private func checkConfigError(config: BmobFactoryOTAInfoModel!) -> String? {
+        
+        var errorMessage:String? = ""
+        
+        if config.firmwareVersion == nil || config.firmwareVersion!.count == 0 {
+            errorMessage = errorMessage! + "请检查配置“版本信息(firmwareVersion)”" + "\n"
+        }
+        if config.needReset == nil {
+            errorMessage = errorMessage! +  "请检查配置“是否需要重置(needReset)”" + "\n"
+        }
+        
+        if config.otaName == nil || config.otaName!.count == 0 {
+            if (config.otaNamePrefix == nil || config.otaNamePrefix!.count == 0) {
+                errorMessage = errorMessage! +  "请检查配置“ota前缀(otaNamePrefix)”" + "\n"
+            }
+        }
+        
+        if config.bleNamePrefix == nil || config.bleNamePrefix!.count == 0 {
+            errorMessage = errorMessage! +  "请检查配置“蓝牙名前缀(bleNamePrefix)”" + "\n"
+        }
+        if config.secretCode == nil || config.secretCode!.count < 6 {
+            errorMessage = errorMessage! +  "请检查配置“口令(secretCode)”" + "\n"
+        }
+        if config.fileFTPPath == nil || config.fileFTPPath!.count == 0 {
+            errorMessage = errorMessage! +  "请检查配置“固件FTP路径(fileFTPPath)”" + "\n"
+        }
+        if config.otaSerialNumber == nil {
+            errorMessage = errorMessage! +  "请检查配置“顺序号(otaSerialNumber)”" + "\n"
+        }
+        if config.customerName == nil || config.customerName!.count == 0 {
+            errorMessage = errorMessage! +  "请检查配置“客户名(customName)”" + "\n"
+        }
+        if config.productName == nil || config.productName!.count == 0 {
+            errorMessage = errorMessage! +  "请检查配置“产品名(productName)”" + "\n"
+        }
+        if config.platform == nil || config.platform!.count == 0 {
+            errorMessage = errorMessage! +  "请检查配置“平台(platform)”" + "\n"
+        }
+        
+        if errorMessage?.count == 0 {
+            return nil
+        }
+        return errorMessage
+    }
+    
     private func createConfig(otaInfoModel:BmobFactoryOTAInfoModel, firmwaresPath:String!) -> OtaConfig {
         
         var config = OtaConfig()
-        config.deviceNamePrefix = otaInfoModel.bleNamePrefix
+        config.deviceNamePrefix = otaInfoModel.bleNamePrefix!
         
         config.otaBleName = otaInfoModel.otaName
         
@@ -283,22 +361,24 @@ class SecretCodeVC: BaseViewController {
             config.prefix = otaInfoModel.otaNamePrefix!
         }
         
+        config.blePrefixAfterOTA = otaInfoModel.blePrefixAfterOTA
+        
         config.needReset = otaInfoModel.needReset!
         
         config.targetDeviceType = otaInfoModel.deviceType
         
-        if otaInfoModel.platform.lowercased().hasPrefix("apollo") {
+        if (otaInfoModel.platform!.lowercased().hasPrefix("apollo")) {
             config.platform = .apollo
         }
-        else if (otaInfoModel.platform.lowercased().hasPrefix("nordic")) {
+        else if (otaInfoModel.platform!.lowercased().hasPrefix("nordic")) {
             config.platform = .nordic
         }
-        else if (otaInfoModel.platform.lowercased().hasPrefix("tlsr")) {
+        else if (otaInfoModel.platform!.lowercased().hasPrefix("tlsr")) {
             config.platform = .tlsr
         }
         
         config.signalMin = Int(-70)
-        config.upgradeCountMax = Int(1)
+        config.upgradeCountMax = Int(2)
         
         let manager = FileManager.default
         let directoryEnumerator = manager.enumerator(atPath: firmwaresPath)
@@ -310,16 +390,6 @@ class SecretCodeVC: BaseViewController {
         var otherPathArr = Array<Firmware>.init()
 
         for (index,fileName) in allFirmwares.enumerated() {
-            print("index = \(index)")
-
-            print("firmwarePath = \(fileName)")
-            
-//            if fileName is String {
-//                let firmwareName = String(fileName as! String)
-//                if !firmwareName.lastPathComponent.contains("Language") {
-//                    continue
-//                }
-//            }
             
             if fileName is String {
                 let firmwareName = String(fileName as! String)
@@ -369,7 +439,7 @@ class SecretCodeVC: BaseViewController {
                 
             }
         }
-        config.firmwares = config.firmwares + picPathArr + touchPathArr + platformPathArr + otherPathArr
+        config.firmwares = config.firmwares + picPathArr + touchPathArr + otherPathArr + platformPathArr 
         
         return config
     }

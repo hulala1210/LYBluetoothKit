@@ -17,7 +17,6 @@ enum OtaPlatform: Int, Codable {
 struct OtaConfig: Codable {
 
     var id = 0
-    var autoReset = false
     var platform: OtaPlatform = .apollo
     var createTime: TimeInterval = Date().timeIntervalSince1970
     var name = ""
@@ -35,6 +34,8 @@ struct OtaConfig: Codable {
     var otaBleName: String?
     var targetDeviceType: String?
     
+    var blePrefixAfterOTA: String?
+    
     func getFirmwares(byType type: OtaDataType) -> [Firmware] {
         var arr = [Firmware]()
         for fm in firmwares {
@@ -49,7 +50,6 @@ struct OtaConfig: Codable {
         var newConfig = OtaConfig()
         
         newConfig.id = self.id
-        newConfig.autoReset = self.autoReset
         newConfig.platform = self.platform
         newConfig.createTime = self.createTime
         newConfig.name = self.name

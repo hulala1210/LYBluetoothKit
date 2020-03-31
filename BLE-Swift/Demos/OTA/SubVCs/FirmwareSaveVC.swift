@@ -44,7 +44,7 @@ class FirmwareSaveVC: BaseViewController, FirmwareTypeVCDelegate {
     
     // MARK: - 事件处理
     @objc func cancelBtnClick() {
-        let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: tmpFirmware.path)
+        let absolutePath = tmpFirmware.path
         _ = StorageUtils.deleteFile(atPath: absolutePath)
         navigationController?.dismiss(animated: true, completion: nil)
     }

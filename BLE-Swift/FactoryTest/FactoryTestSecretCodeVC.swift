@@ -47,15 +47,20 @@ class FactoryTestSecretCodeVC: BaseViewController {
                 self.showError(error?.localizedDescription)
             }
             else {
-                BmobFactoryTestHelper.queryTestGroups(groupSerial: config!.testGroupsSerial) { (testGroups, groupError) in
-                    if groupError != nil || testGroups?.count == 0 {
-                        self.showError(groupError?.localizedDescription)
-                    }
-                    else {
-                        let vc = FactoryTestCaseListVC()
-                        vc.testCaseSuit = testGroups!
-                        vc.testConfig = config
-                        self.navigationController?.pushViewController(vc, animated: true)
+                if config == nil {
+                    self.alert(msg: "没有找到测试任务。",confirmText:"知道了", confirmSel: nil, cancelText: nil, cancelSel: nil)
+                }
+                else {
+                    BmobFactoryTestHelper.queryTestGroups(groupSerial: config!.testGroupsSerial) { (testGroups, groupError) in
+                        if groupError != nil || testGroups?.count == 0 {
+                            self.showError(groupError?.localizedDescription)
+                        }
+                        else {
+                            let vc = FactoryTestCaseListVC()
+                            vc.testCaseSuit = testGroups!
+                            vc.testConfig = config
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
                     }
                 }
             }

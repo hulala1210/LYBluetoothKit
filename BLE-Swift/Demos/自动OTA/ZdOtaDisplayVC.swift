@@ -9,7 +9,10 @@
 import UIKit
 import SwiftScanner
 
-class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+let zdOtaStopCountdownLimited:Int = 5
+
+class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, FactoryOTAResetHelperDelegate {
+    
 
     var config: OtaConfig!
     
@@ -29,6 +32,10 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
     var connectingName: String = ""
     var isScanning: Bool = false
     
+    let resetHelper = FactoryOTAResetHelper.init()
+    
+    private var stopCountDown:Int! = 0
+    
     deinit {
         print("ZdOtaDisplayVC dealloc")
     }
@@ -38,6 +45,9 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         
         self.title = "自动OTA"
         self.view.backgroundColor = UIColor.black
+        
+        resetHelper.config = self.config
+        resetHelper.delegate = self
         
         logTV.layoutManager.allowsNonContiguousLayout = false
         
@@ -110,17 +120,20 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             printLog("当前正在进行ota的个数(\(count))，已经最大了")
             return
         }
-//        else
-//        {
-//            printLog("15秒后，重新搜索")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-//                self.startScan()
-//            }
-//        }
         
         guard let devices = scanDevices, devices.count > 0 else {
-            printLog("扫描到设备个数为0，5秒之后重新扫描")
-            reScan(afterSecond: 5)
+            
+            self.stopCountDown = self.stopCountDown + 1
+            
+            if self.stopCountDown < zdOtaStopCountdownLimited || config.blePrefixAfterOTA == nil || config.blePrefixAfterOTA!.count == 0 {
+                printLog("扫描到设备个数为0，5秒之后重新扫描")
+                reScan(afterSecond: 5)
+            }
+            else {
+                printLog("扫描到设备个数为0，升级任务连续\(zdOtaStopCountdownLimited)次扫描不到，开启重置任务。")
+                resetHelper.startTask()
+            }
+            
             return
         }
         printLog("开始挑选满足条件的，并连接设备")
@@ -130,10 +143,6 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             
             if !isDeviceAvaiable(name: d.name) {
                 continue
-            }
-            
-            if d.name.hasPrefix("Helio") {
-                print("get")
             }
             
             if d.name.hasPrefix(config.deviceNamePrefix), d.rssi >= config.signalMin {
@@ -165,10 +174,19 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         
         // 如果没有合适的，那5秒之后再重新扫描
         if !hasFitOne {
-            printLog("扫描到合适的设备个数为0，5秒之后重新扫描")
-            reScan(afterSecond: 5)
+            self.stopCountDown = self.stopCountDown + 1
+            if self.stopCountDown < zdOtaStopCountdownLimited || config.blePrefixAfterOTA == nil || config.blePrefixAfterOTA!.count == 0 {
+                printLog("扫描到设备个数为0，5秒之后重新扫描")
+                reScan(afterSecond: 5)
+            }
+            else {
+                printLog("扫描到设备个数为0，升级任务连续\(zdOtaStopCountdownLimited)次扫描不到，开启重置任务。")
+                resetHelper.startTask()
+            }
         }
-        
+        else {
+            self.stopCountDown = 0
+        }
         
     }
     
@@ -222,6 +240,10 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                                 if fw.type != OtaDataType.picture {
                                     finalFwArr.append(fw)
                                 }
+                                // 如果没有检测到图库版本信息，就升级。这个对于自动升级是必须要的判断，因为自动升级添加上来的固件就是没有版本信息的。
+                                else if fw.versionCode == 0.0 {
+                                    finalFwArr.append(fw)
+                                }
                                 else if fw.versionCode > versionValue {
                                     finalFwArr.append(fw)
                                 }
@@ -255,7 +277,7 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         }
         
         // 校验deviceType
-        if self.config.targetDeviceType != nil {
+        if self.config.targetDeviceType != nil && self.config.targetDeviceType!.count > 0 {
             // 获取deviceType，如果targetDeviceType和获取到的deviceType不匹配，则什么也不做，直接当做升级失败。
             let _ = BLECenter.shared.getDeviceType(stringCallback: { (deviceType:String?, error:BLEError?) in
                 
@@ -475,6 +497,15 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         return false
     }
     
+    // MARK: - FactoryOTAResetHelperDelegate
+    func resetHelperPrintLog(helper: FactoryOTAResetHelper!, message: String!) {
+        printLog(message)
+    }
+    
+    func resetHelperTaskEnd(helper: FactoryOTAResetHelper!) {
+        stopCountDown = 0
+        reScan(afterSecond: 2)
+    }
     
     // MARK: - tableView
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

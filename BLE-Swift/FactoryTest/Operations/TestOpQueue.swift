@@ -13,5 +13,5 @@ class TestOpQueue: BaseOperationQueue {
     public var device:BLEDevice?
     @objc dynamic public var message:String! = ""
     public var badMessage:String! = ""
-    public var image:UIImage?
+    @objc dynamic public var image:UIImage?
 }

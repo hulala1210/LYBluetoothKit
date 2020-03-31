@@ -8,9 +8,7 @@
 
 import Foundation
 protocol BLEDeviceResetProtocol {
-//    func pointerRotation(pointer:LYBCClockPointer, direction:LYBCDirection, angle:UInt16, callback:BoolCallback?, toDeviceName deviceName:String) -> BLETask?
     func resetDevice(boolCallback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?
-
 }
 
 extension BLEDeviceResetProtocol {

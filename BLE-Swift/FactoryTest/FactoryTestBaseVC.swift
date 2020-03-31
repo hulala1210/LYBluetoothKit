@@ -27,21 +27,7 @@ class FactoryTestBaseVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.setNavRightButton(text: "Start Right Now", sel: #selector(navRightSelector))
-        
-        let settingButton = UIButton(type: .custom)
-        settingButton.setTitle("Setting", for: .normal)
-        settingButton.setTitleColor(kMainColor, for: .normal)
-        let f = font(14)
-        let textSize = settingButton.title(for: .normal)!.size(withFont: f)
-        settingButton.titleLabel?.font = f
-        settingButton.frame = CGRect(x: 0, y: 0, width: textSize.width, height: 44)
-        settingButton.addTarget(self, action: #selector(settingButtonAction), for: .touchUpInside)
-        let settingNavItem = UIBarButtonItem.init(customView: settingButton)
-        self.navigationItem.rightBarButtonItems = [self.navigationItem.rightBarButtonItem!, settingNavItem];
-        
+         
         queue.maxConcurrentOperationCount = 1
         
         weak var weakSelf = self
@@ -51,19 +37,19 @@ class FactoryTestBaseVC: BaseViewController {
             }
         }
         
+        createConnectCase()
         createTestCase(cases: testCases)
     }
     
     @objc func navRightSelector() {
-        
+        showResultAlert(device: queue.device!)
     }
     
     @objc func settingButtonAction() {
         
     }
     
-    func createTestCase(cases:Array<FactoryTestCase>) -> Void {
-
+    func createConnectCase() -> Void {
         weak var weakSelf = self
 
         let failureBlock:TestOpFailedBlock = {(error) in
@@ -78,39 +64,18 @@ class FactoryTestBaseVC: BaseViewController {
         let searchTask = BLESearchOp.init()
         searchTask.bleNamePrefix = testConfig!.bleNamePrefix
         let connectTask = BLEConnectOp.init()
-//        let hidePairTask = BLEHidePairOp.init()
-//        let versionTask = BLEVersionTestOp.init()
-//        let hardVersionTask = BLEHardVersionTestOp.init()
-//        let deviceNumTask = BLEDeviceNumTestOp.init()
-//        let gesensorTask = BLEGesensorTestOp.init()
-//        let motorTask = BLEMotorTestOp.init()
-//        let flashTask = BLEFlashTestOp.init()
-//        let heartRateTask = BLEHeartRateTestOp.init()
-//        let bleNameTask = BLENameTestOp.init()
-//
+
         searchTask.failedBlock = failureBlock
         connectTask.failedBlock = failureBlock
-//        hidePairTask.failedBlock = failureBlock
-//        versionTask.failedBlock = failureBlock
-//        hardVersionTask.failedBlock = failureBlock
-//        deviceNumTask.failedBlock = failureBlock
-//        gesensorTask.failedBlock = failureBlock
-//        motorTask.failedBlock = failureBlock
-//        flashTask.failedBlock = failureBlock
-//        heartRateTask.failedBlock = failureBlock
-//        bleNameTask.failedBlock = failureBlock
-//
+
         queue.addOperation(searchTask)
         queue.addOperation(connectTask)
-//        queue.addOperation(hidePairTask)
-//        queue.addOperation(versionTask)
-//        queue.addOperation(hardVersionTask)
-//        queue.addOperation(deviceNumTask)
-//        queue.addOperation(gesensorTask)
-//        queue.addOperation(motorTask)
-//        queue.addOperation(flashTask)
-//        queue.addOperation(heartRateTask)
-//        queue.addOperation(bleNameTask)
+    }
+    
+    func createTestCase(cases:Array<FactoryTestCase>) -> Void {
+
+        weak var weakSelf = self
+
         for cs in cases {
             let type = FactoryTestCaseType(rawValue: cs.serialNumber)!
             let op = createOperation(testType: type)
@@ -123,6 +88,7 @@ class FactoryTestBaseVC: BaseViewController {
         queue.addOperation {
             DispatchQueue.main.async {
                 weakSelf!.showResultAlert(device: weakSelf!.queue.device!)
+                weakSelf!.setNavRightButton(text: "显示结果", sel: #selector(weakSelf!.navRightSelector))
             }
         }
         
@@ -132,7 +98,7 @@ class FactoryTestBaseVC: BaseViewController {
         
     }
     
-    private func showResultAlert(device:BLEDevice) {
+    public func showResultAlert(device:BLEDevice) {
         
         weak var weakSelf = self
         // Prepare the popup assets

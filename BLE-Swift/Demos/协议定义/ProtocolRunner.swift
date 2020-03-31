@@ -243,7 +243,7 @@ class ProtocolRunner {
                         let min = data[index + 1]
                         let sec = data[index + 2]
                         
-                        dict[name] = "\(hour):\(min):\(sec)"
+                        dict[name] = "\(String.init(format: "%02d", hour)):\(String.init(format: "%02d", min)):\(String.init(format: "%02d", sec))"
                         index += 3
                     }
                     else if type == "Date" {

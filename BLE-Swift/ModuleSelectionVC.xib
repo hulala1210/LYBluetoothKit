@@ -19,22 +19,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDb-Sn-091">
-                    <rect key="frame" x="176" y="463" width="62" height="30"/>
-                    <state key="normal" title="蓝牙工具"/>
+                    <rect key="frame" x="134.5" y="495.5" width="107" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="蓝牙工具" image="tool_icons_on"/>
                     <connections>
                         <action selector="bleToolButtonAction:" destination="-1" eventType="touchUpInside" id="ptu-5q-IJG"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAy-7u-aCr">
-                    <rect key="frame" x="162" y="403" width="90" height="30"/>
-                    <state key="normal" title="厂测OTA工具"/>
+                    <rect key="frame" x="134.5" y="375.5" width="144" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="厂测OTA工具" image="ota_icons_on"/>
                     <connections>
                         <action selector="factoryTestButtonAction:" destination="-1" eventType="touchUpInside" id="6kL-fj-VVT"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxT-Ol-QvI">
-                    <rect key="frame" x="176" y="333" width="62" height="30"/>
-                    <state key="normal" title="自动测试"/>
+                    <rect key="frame" x="134" y="434" width="145" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="机芯自动测试" image="ant.fill" catalog="system"/>
                     <connections>
                         <action selector="autoTestToolButtonAction:" destination="-1" eventType="touchUpInside" id="S3B-pU-xl7"/>
                     </connections>
@@ -42,15 +45,20 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="xAy-7u-aCr" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-30" id="An4-lw-kZP"/>
-                <constraint firstItem="xAy-7u-aCr" firstAttribute="top" secondItem="dxT-Ol-QvI" secondAttribute="bottom" constant="40" id="BXr-ba-LlW"/>
-                <constraint firstItem="xAy-7u-aCr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YpX-qy-4Fi"/>
-                <constraint firstItem="DDb-Sn-091" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sgO-Nj-9JA"/>
+                <constraint firstItem="xAy-7u-aCr" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-60" id="An4-lw-kZP"/>
+                <constraint firstItem="dxT-Ol-QvI" firstAttribute="leading" secondItem="xAy-7u-aCr" secondAttribute="leading" id="Yor-vx-8oU"/>
+                <constraint firstItem="dxT-Ol-QvI" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bXa-QL-8Bo"/>
+                <constraint firstItem="DDb-Sn-091" firstAttribute="leading" secondItem="xAy-7u-aCr" secondAttribute="leading" id="l6G-n9-Hek"/>
                 <constraint firstItem="dxT-Ol-QvI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="w03-LW-U96"/>
-                <constraint firstItem="DDb-Sn-091" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="30" id="x6E-TF-ycJ"/>
+                <constraint firstItem="DDb-Sn-091" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="60" id="x6E-TF-ycJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="132" y="121"/>
+            <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="ant.fill" catalog="system" width="52" height="64"/>
+        <image name="ota_icons_on" width="25" height="25"/>
+        <image name="tool_icons_on" width="25" height="25"/>
+    </resources>
 </document>

@@ -152,9 +152,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        let filePath = tmpDir.stringByAppending(pathComponent: fileName)
+//        let filePath = tmpPath.stringByAppending(pathComponent: fileName)
         
-        let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: filePath)
+//        let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: filePath)
+        
+        let relativeURLPath = "Inbox".stringByAppending(pathComponent: fileName)
+        
+        let absolutePath = StorageUtils.getDocPath().stringByAppending(pathComponent: relativeURLPath)
         
         if !StorageUtils.isFileExits(atPath: absolutePath) {
             if StorageUtils.isFileExits(atPath: url.absoluteString) {
@@ -168,7 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fm = Firmware()
         fm.name = fileName
         fm.type = Firmware.getOtaType(withFileName: fileName)
-        fm.path = filePath
+        fm.relativeURLPath = relativeURLPath
         fm.id = Int(Date().timeIntervalSince1970)
         
         let vc = FirmwareSaveVC()

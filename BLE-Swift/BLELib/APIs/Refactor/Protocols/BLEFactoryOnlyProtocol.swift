@@ -9,6 +9,7 @@
 import Foundation
 protocol BLEFactoryOnlyProtocol {
     // protocol definition goes here
+//    var wheel: Int {get set}
     func checkGesensor(callback:DataArrayCallback?, toDeviceName deviceName:String?) -> BLETask?
     
     func startMotor(callback:BoolCallback?, toDeviceName deviceName:String?) -> BLETask?

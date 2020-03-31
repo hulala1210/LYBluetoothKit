@@ -209,6 +209,16 @@ class DeviceInfoViewController: BaseViewController, UITableViewDelegate, UITable
         return 50
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        print(view)
+        
+        if view is UITableViewHeaderFooterView {
+            let headerFooterView:UITableViewHeaderFooterView! = (view as! UITableViewHeaderFooterView)
+            headerFooterView.textLabel?.adjustsFontSizeToFitWidth = true
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         let dInfo = deviceInfos[section]

@@ -39,7 +39,7 @@ class BLEAntiHourRotationOp: BaseOperation {
                 queue.message = queue.message + "\n时针逆时针转一圈命令发送失败"
             }
 
-            DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 8) {
                 self.done()
             }
             

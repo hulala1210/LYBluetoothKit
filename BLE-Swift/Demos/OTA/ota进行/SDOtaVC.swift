@@ -248,7 +248,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         var otaDatas = [OtaDataModel]()
         for fm in config.firmwares {
             
-            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            let path = fm.path 
             
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
@@ -295,7 +295,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         var otaDatas = [OtaDataModel]()
         for fm in config.firmwares {
             
-            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            let path = fm.path
             
             // 如果是平台升级
             if fm.type == .platform {
@@ -365,7 +365,7 @@ class SDOtaVC: BaseViewController, UITableViewDataSource, UITableViewDelegate {
         var otaDatas = [OtaDataModel]()
         for fm in config.firmwares {
             
-            let path = StorageUtils.getDocPath().stringByAppending(pathComponent: fm.path)
+            let path = fm.path
             
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))

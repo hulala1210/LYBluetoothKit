@@ -11,7 +11,21 @@ extension BLECenter {
     
     public func getDeviceType(stringCallback:StringCallback?, toDeviceName deviceName:String? = nil)->BLETask? {
         let data = Data(bytes: [0x6f, 0x03, 0x70, 0x01, 0x00, 0x00, 0x8f])
-        return send(data: data, stringCallback: stringCallback, toDeviceName: deviceName)
+        return send(data: data, dataArrayCallback: { (dataArray, error) in
+            
+            if stringCallback != nil {
+                if error == nil && dataArray != nil && dataArray!.count > 0 {
+                    let data = dataArray![0];
+                    let subdata = data[1...data.count - 1]
+                    let versionStr = String(bytes: subdata, encoding: String.Encoding.utf8)
+                    stringCallback!(versionStr, error)
+                }
+                else {
+                    stringCallback!(nil, error)
+                }
+            }
+            
+        }, toDeviceName: deviceName)
     }
     
     public func getDeviceID(stringCallback:StringCallback?, toDeviceName deviceName:String? = nil)->BLETask? {
@@ -55,7 +69,7 @@ extension BLECenter {
     
     public func getVersionStr(forType type: UInt8, stringCallback:StringCallback?, toDeviceName deviceName: String?) -> BLETask? {
         let data = Data(bytes: [0x6f, 0x03, 0x70, 0x01, 0x00, type, 0x8f])
-//        return send(data: data, stringCallback: stringCallback, toDeviceName: deviceName)
+        
         return send(data: data, dataArrayCallback: { (dataArray, error) in
             
             if stringCallback != nil {
@@ -105,4 +119,5 @@ extension BLECenter {
             }
         }, toDeviceName: deviceName)
     }
+    
 }

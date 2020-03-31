@@ -8,16 +8,40 @@
 
 import UIKit
 
+enum FirmwareBaseURLPathType:Int, Codable {
+    case Doc = 1
+    case Cache = 2
+    case Tmp = 3
+}
+
 class Firmware: Codable, Equatable {
     
     var id = 0
     var name = ""
-//    {
-//        didSet {
-//            type = Firmware.getOtaType(withFileName: name)
-//        }
-//    }
-    var path = ""
+    
+    var baseURLPathType:FirmwareBaseURLPathType = .Doc
+    
+    var baseURLPath:String {
+        switch self.baseURLPathType {
+            case .Doc:
+                return StorageUtils.getDocPath()
+            case .Tmp:
+                return StorageUtils.getTempPath()
+            case .Cache:
+                return StorageUtils.getCahcePath()
+        }
+    }
+        
+    var relativeURLPath = ""
+    var path:String {
+        if relativeURLPath.count == 0 {
+            return ""
+        }
+        else {
+            return baseURLPath.stringByAppending(pathComponent: relativeURLPath)
+        }
+    }
+    
     var versionName = ""
     var versionCode = 0.0
     var type: OtaDataType = .platform

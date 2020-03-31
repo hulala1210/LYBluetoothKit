@@ -80,8 +80,16 @@ class FactoryTestCaseListVC: BaseViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let testGroup = testCaseSuit[indexPath.row]
+        
+        if testGroup.serialNumber == 3 {
+            let vc = FactoryCollateVC.init()
+            vc.testConfig = self.testConfig
+            self.navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+        
         self.startLoading(nil)
-
+        
         BmobFactoryTestHelper.queryTestCases(casesSerial: testGroup.testCasesSerial) { (testCases, error) in
             self.stopLoading()
             if error != nil {

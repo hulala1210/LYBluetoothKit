@@ -403,7 +403,28 @@ class SecretCodeVC: BaseViewController {
                 let fw = Firmware.init()
                                 
                 fw.id = index
-                fw.path = pathString
+                
+                var suffixLength = 0
+                if pathString.hasPrefix(StorageUtils.getCahcePath()) {
+                    fw.baseURLPathType = .Cache
+                    suffixLength = pathString.count - StorageUtils.getCahcePath().count
+                }
+                else if pathString.hasPrefix(StorageUtils.getTempPath()) {
+                    fw.baseURLPathType = .Tmp
+                    suffixLength = pathString.count - StorageUtils.getTempPath().count
+                }
+                else if pathString.hasPrefix(StorageUtils.getDocPath()) {
+                    fw.baseURLPathType = .Doc
+                    suffixLength = pathString.count - StorageUtils.getDocPath().count
+                }
+                else {
+                    fw.baseURLPathType = .Cache
+                    suffixLength = pathString.count - StorageUtils.getCahcePath().count
+                }
+                
+                let relativePath = pathString.suffix(suffixLength)
+                
+                fw.relativeURLPath = String(relativePath)
                 let type = Firmware.getOtaType(withFileName: firmwareName)
                 fw.type = type
                 

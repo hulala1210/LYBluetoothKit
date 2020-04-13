@@ -117,8 +117,17 @@ class BLEDevicesManager: NSObject {
         }
     }
     // 由外部(BLECenter)通知设备连接上了
-    func peripheralConnected(_ peripheral:CBPeripheral) {
-        guard let task = getConnectTask(byName: peripheral.name ?? "") else {
+    func peripheralConnected(_ peripheral:CBPeripheral, _ device:BLEDevice?) {
+        
+        var bleName = ""
+        if device != nil {
+            bleName = device!.name
+        }
+        else if peripheral != nil && peripheral.name != nil {
+            bleName = peripheral.name!
+        }
+        
+        guard let task = getConnectTask(byName: bleName) else {
             return
         }
         if task.device == nil {

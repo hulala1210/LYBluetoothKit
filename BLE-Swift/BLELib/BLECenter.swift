@@ -397,7 +397,7 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-//        print("name:\(peripheral.name ?? "nil"), rssi:\(RSSI)")
+//        print("Discover name:\(peripheral.name ?? "nil"), rssi:\(RSSI)", "advertisementData:\(advertisementData)")
         let device = BLEDevice(peripheral, rssi: RSSI, advertisementData: advertisementData)
         if !discoveredDevices.contains(device) {
             discoveredDevices.append(device)
@@ -409,7 +409,15 @@ public class BLECenter: NSObject, CBCentralManagerDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        self.devicesManager.peripheralConnected(peripheral)
+        
+        var bleDevice:BLEDevice?
+        for device in discoveredDevices {
+            if device.peripheral == peripheral {
+                bleDevice = device
+            }
+        }
+        
+        self.devicesManager.peripheralConnected(peripheral, bleDevice)
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {

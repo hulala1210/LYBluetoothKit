@@ -110,6 +110,9 @@ class ZdOtaTask: Equatable {
         let readyBlock = { NotificationCenter.default.post(name: kZdOtaTaskReady, object: nil, userInfo: nil) }
         
         let progressBlock = {(progress:Float) -> Void in
+            
+            print("ota 进度 蓝牙名：\(device.name) 进度:\(progress)")
+            
             weakSelf?.progressCallback?(progress)
             
             NotificationCenter.default.post(name: kZdOtaTaskProgressUpdate, object: nil, userInfo: ["progress": progress, "task": self])

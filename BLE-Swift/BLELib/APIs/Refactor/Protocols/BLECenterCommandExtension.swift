@@ -11,7 +11,11 @@ import Foundation
 typealias BLECommandProtocol = BLEFactoryOnlyProtocol &
     BLEDeviceCtrlProtocol &
     BLEDevicePointerCtrlProtocol &
-    BLEDeviceResetProtocol
+    BLEDeviceResetProtocol &
+    BLEDeviceSyncSportProtocol &
+    BLEDeviceSyncSleepProtocol &
+    BLEDeviceSportSleepNumProtocol &
+    BLEDeviceSportClearProtocol
 
 extension BLECenter:BLECommandProtocol
 {

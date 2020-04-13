@@ -14,12 +14,32 @@ public typealias FTPBulkDownloadCallBack = (_ allSuccess:Bool, _ successFiles:Ar
 
 public typealias FTPProgressCallBack = (Progress)->()
 
-class FTPHelper: NSObject {
+let FTPHelperErrorDomain = "FTPHelperErrorDomain"
+
+enum FTPHelperErrorCode:Int {
+    case serverURLError = -1000
+    case localURLError = -1001
+
+}
+
+class FTPHelper {
     
     static let shared = FTPHelper()
     
-    public func asynBulkDownloadFiles(localDirectory:String, ftpPaths:Array<String>, progress:FTPProgressCallBack?, callback:FTPBulkDownloadCallBack?) -> Void {
+    private func verifyURL(_ URLString:String) -> Bool {
+//        if URLString.contains("\n") || URLString.contains("\r") || URLString.contains("\t") {
+//            return false
+//        }
+//        return true
         
+        if URLString.count > 0 {
+            return NSPredicate.init(format: "SELF MATCHES %@", "^[Ff][Tt][Pp]://(\\w*(:[=_0-9a-zA-Z\\$\\(\\)\\*\\+\\-\\.\\[\\]\\?\\\\\\^\\{\\}\\|`~!#%&\'\",<>/]*)?@)?([0-9a-zA-Z\\-\\.]+\\.)+[0-9a-zA-Z\\.]+(:(6553[0-5]|655[0-2]\\d|654\\d\\d|64\\d\\d\\d|[0-5]?\\d?\\d?\\d?\\d))?(/?|((/[=_0-9a-zA-Z\\-%\\.]+)+(/|\\.[_0-9a-zA-Z\\.]+)?))$").evaluate(with: URLString)
+        }
+        
+        return false
+    }
+    
+    public func asynBulkDownloadFiles(localDirectory:String, ftpPaths:Array<String>, progress:FTPProgressCallBack?, callback:FTPBulkDownloadCallBack?) -> Void {
         let group = DispatchGroup.init()
         
         // 保证最大并发量
@@ -77,16 +97,27 @@ class FTPHelper: NSObject {
     
     public func asynDownloadFile(localPath:String, ftpPath:String, progress:FTPProgressCallBack?, callback:FTPDownloadCallBack?) -> Void {
         
+        
         let request = LxFTPRequest.download()
+        
+        if verifyURL(ftpPath) == false {
+            if callback != nil {
+                let error = NSError.init(domain: FTPHelperErrorDomain, code: FTPHelperErrorCode.serverURLError.rawValue, userInfo: [NSLocalizedDescriptionKey:"服务端路径配置不合法"])
+
+                callback!(false, error)
+            }
+            return
+        }
         
         let encodeURL:String = GBKEncodingUtil.gbkTransCoding(ftpPath)
         
         let serverURL = URL.init(string: encodeURL)
-        
         // 通过KVC绕过set方法里的验证合法性，直接设置。
         request?.setValue(serverURL, forKey: "_serverURL");
+//        request?.serverURL = serverURL
         
         let localeURL = URL.init(fileURLWithPath: localPath)
+        
         request?.setValue(localeURL, forKey: "_localFileURL");
 
 //        request?.localFileURL = URL.init(fileURLWithPath: localPath)
@@ -130,12 +161,22 @@ class FTPHelper: NSObject {
     }
     
     public func asyncFindSource(ftpPath:String!, progress:FTPProgressCallBack?, callback:FTPFindSourceCallBack?) -> Void {
+
+        if verifyURL(ftpPath) == false {
+            if callback != nil {
+                let error = NSError.init(domain: FTPHelperErrorDomain, code: FTPHelperErrorCode.serverURLError.rawValue, userInfo: [NSLocalizedDescriptionKey:"服务端路径配置不合法"])
+                
+                callback!(false, nil, error)
+            }
+            return
+        }
+        
         let request = LxFTPRequest.resourceList()
                 
         let encodeURL:String = GBKEncodingUtil.gbkTransCoding(ftpPath)
 
         let ftpURL:URL? = URL.init(string: encodeURL)
-
+        
         // 通过KVC绕过set方法里的验证合法性，直接设置。
         request?.setValue(ftpURL, forKey: "_serverURL");
         
@@ -165,7 +206,7 @@ class FTPHelper: NSObject {
         
         let failedBlock = {(errorDomain:CFStreamErrorDomain, errorCode:Int, errorDescrption:String?) -> Void in
             if callback != nil {
-                let error = NSError.init(domain: "FTPHelper", code: errorCode, userInfo: [NSLocalizedDescriptionKey:errorDescrption ?? ""])
+                let error = NSError.init(domain: FTPHelperErrorDomain, code: errorCode, userInfo: [NSLocalizedDescriptionKey:errorDescrption ?? ""])
                 
                 callback!(false, nil, error)
             }

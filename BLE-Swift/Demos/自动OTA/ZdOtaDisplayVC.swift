@@ -123,7 +123,9 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         
         guard let devices = scanDevices, devices.count > 0 else {
             
-            self.stopCountDown = self.stopCountDown + 1
+            if self.getOtaingCount() == 0 {
+                self.stopCountDown = self.stopCountDown + 1
+            }
             
             if self.stopCountDown < zdOtaStopCountdownLimited || config.blePrefixAfterOTA == nil || config.blePrefixAfterOTA!.count == 0 {
                 printLog("扫描到设备个数为0，5秒之后重新扫描")
@@ -174,7 +176,9 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
         
         // 如果没有合适的，那5秒之后再重新扫描
         if !hasFitOne {
-            self.stopCountDown = self.stopCountDown + 1
+            if self.getOtaingCount() == 0 {
+                self.stopCountDown = self.stopCountDown + 1
+            }
             if self.stopCountDown < zdOtaStopCountdownLimited || config.blePrefixAfterOTA == nil || config.blePrefixAfterOTA!.count == 0 {
                 printLog("扫描到设备个数为0，5秒之后重新扫描")
                 reScan(afterSecond: 5)
@@ -263,6 +267,12 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
                             leadToOTAFailed()
                         }
                     }
+                    else {
+                        weakSelf?.showError("从固件中没获取到图库版本号")
+                        // 此task无需start
+                        leadToOTAFailed()
+                    }
+                    
                 }
                 else {
                     self.printLog("获取设备版本号失败，")
@@ -276,33 +286,58 @@ class ZdOtaDisplayVC: BaseViewController, UITableViewDataSource, UITableViewDele
             
         }
         
-        // 校验deviceType
-        if self.config.targetDeviceType != nil && self.config.targetDeviceType!.count > 0 {
-            // 获取deviceType，如果targetDeviceType和获取到的deviceType不匹配，则什么也不做，直接当做升级失败。
-            let _ = BLECenter.shared.getDeviceType(stringCallback: { (deviceType:String?, error:BLEError?) in
+        let judgeDeviceTypeAndStartOta = {
+            
+            // 不管取消配对命令有没有走成功都继续走
+            // 校验deviceType
+            if self.config.targetDeviceType != nil && self.config.targetDeviceType!.count > 0 {
+                // 获取deviceType，如果targetDeviceType和获取到的deviceType不匹配，则什么也不做，直接当做升级失败。
+                let _ = BLECenter.shared.getDeviceType(stringCallback: { (deviceType:String?, error:BLEError?) in
+                    
+                    if self.config.targetDeviceType?.count == 0 || deviceType == self.config.targetDeviceType {
+                        startOTABlock()
+                    }
+                    else {
+                        // 此task无需start
+                        leadToOTAFailed()
+                    }
+                    
+                }, toDeviceName: device.name)
+            }
+            else {
+                // 如果没有设置targetDeviceType，则默认是可以直接升级的。
+                startOTABlock()
+            }
+        }
+        
+        
+        if self.config.platform == .tlsr {
+            // 取消配对命令
+            printLog("发送取消配对命令")
+            let _ = BLECenter.shared.cancelPairCommand(callback: { (success, error) in
                 
-                if self.config.targetDeviceType?.count == 0 || deviceType == self.config.targetDeviceType {
-                    startOTABlock()
+                if success {
+                    self.printLog("发送取消配对命令成功")
                 }
                 else {
-                    // 此task无需start
-                    leadToOTAFailed()
+                    self.printLog("发送取消配对命令失败")
                 }
+                
+                judgeDeviceTypeAndStartOta()
                 
             }, toDeviceName: device.name)
         }
         else {
-            // 如果没有设置targetDeviceType，则默认是可以直接升级的。
-            startOTABlock()
+            judgeDeviceTypeAndStartOta()
         }
-        
+                
     }
        
     func getFirmwareVersion(deviceName:String?, cb:StringCallback?) {
         startLoading(nil)
 
         weak var weakSelf = self
-        _ = BLECenter.shared.getFirmwareVersion(stringCallback: { (firmwareString, error) in
+        _ = BLECenter.shared.getFirmwareVersionWithBuild(stringCallback: { (firmwareString, error) in
             weakSelf?.stopLoading()
             if cb != nil {
                 cb! (firmwareString, error)

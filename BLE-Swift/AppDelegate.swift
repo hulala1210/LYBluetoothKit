@@ -20,6 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
     
+//        let sleep:Sleep13 = Sleep13()
+//        
+//        do {
+//            print(try sleep.allProperties())
+//        } catch _ {
+//
+//        }
+        
+        
         Bugly.start(withAppId: "8092dc4a83")
         
         createFirmwareDirectory()

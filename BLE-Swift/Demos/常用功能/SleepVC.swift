@@ -37,13 +37,23 @@ class SleepVC: BaseViewController {
                 return
             }
             
-            weakSelf?.num = sportNum
+            weakSelf?.num = sleepNum
             
-            weakSelf?.numLbl.text = "\(sportNum)个"
+            weakSelf?.numLbl.text = "\(sleepNum)个"
         })
     }
     
     @IBAction func detailbtnClick(_ sender: Any) {
+        if num == 0 {
+            self.showError("个数为0，不能获取详情")
+            return
+        }
+        
+        startLoading(nil)
+        weak var weakSelf = self
+        _ = BLECenter.shared.getSleepDetail(num: num, callback: { (sleeps, error) in
+            
+        })
     }
     
     

@@ -35,10 +35,6 @@ class FactoryOTAResetHelper:BaseViewController {
     
     private func startScan() {
         
-//        if isStop {
-//            return
-//        }
-        
         printLog("开始扫描设备")
         weak var weakSelf = self
         BLECenter.shared.scan(callback: { (devices, err) in
@@ -143,13 +139,23 @@ class FactoryOTAResetHelper:BaseViewController {
             if !success || (error != nil) {
                 weakSelf!.unusedList.append(device)
                 self.printLog("重置设备失败")
+                weakSelf!.unusedList.append(device)
             }
             else {
                 self.printLog("重置设备成功")
                 weakSelf!.successList.append(device)
             }
             
-            let _ = BLECenter.shared.disconnect(device: device, callback: nil)
+            self.printLog("断连设备")
+            let _ = BLECenter.shared.disconnect(device: device, callback: { (disconnectDevice, error) in
+                
+                if device == disconnectDevice {
+                    self.printLog("断连设备成功")
+                }
+                
+                self.printLog("5秒后继续寻找设备")
+                weakSelf?.reScan(afterSecond: 5)
+            })
             
         }, toDeviceName: device.name)
     }

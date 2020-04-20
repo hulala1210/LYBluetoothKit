@@ -52,15 +52,54 @@ class SleepVC: BaseViewController {
         startLoading(nil)
         weak var weakSelf = self
         _ = BLECenter.shared.getSleepDetail(num: num, callback: { (sleeps, error) in
+            weakSelf?.stopLoading()
+            if error != nil {
+                weakSelf?.handleBleError(error: error)
+                return
+            }
             
+            guard let sleepArr = sleeps, sleepArr.count > 0 else {
+                weakSelf?.showError("返回数据为空")
+                return
+            }
+            
+            weakSelf?.sleeps = sleepArr
+//            var steps: UInt = 0
+//            var du: UInt = 0
+//            var cal: UInt = 0
+//            var dis: UInt = 0
+            
+            var str = ""
+            
+            for s in sleepArr {
+                do {
+                    let propertyInfo = try s.allProperties().description
+                    
+                    str = str + propertyInfo
+                    str = str + "\n"
+
+                } catch let error {
+                    print(error)
+                }
+            }
+            
+            weakSelf?.summaryLbl.text = str
         })
     }
     
     
     @IBAction func seeDetailBtnClick(_ sender: Any) {
+        guard let sleeps = self.sleeps, sleeps.count > 0 else {
+            showError("运动数据为空")
+            return
+        }
+        let vc = SleepDetailVC()
+        vc.sleeps = sleeps
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func delBtnClick(_ sender: Any) {
+        
     }
     
 }

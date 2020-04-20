@@ -66,13 +66,35 @@ extension PropertyHelper
         var originData = origin
         
         if originData is Array<Data> {
-            var result:Array<Self>? = nil
-            let pointer = UnsafeMutablePointer(&originData)
-            let _ = pointer.withMemoryRebound(to: Array<Self>.self, capacity: (originData as! Array<Data>).count) { (ptr) in
-                result = ptr.pointee
+            var result:Array<Self>! = []
+            
+            for data in originData as! Array<Data> {
+                var tmpData = data
+                let pointer = UnsafeMutablePointer(&tmpData)
+                var sleep:Self? = nil
+                let _ = pointer.withMemoryRebound(to: Self.self, capacity: 1) { (ptr) in
+                    sleep = ptr.pointee
+                }
+                
+                if sleep != nil {
+                    result.append(sleep!)
+                }
             }
             
-            return result as Any
+            if result.count > 0 {
+                return result
+            }
+            else {
+                result = nil
+                return result
+            }
+            
+//            let pointer = UnsafeMutablePointer(&originData)
+//            let _ = pointer.withMemoryRebound(to: Array<Self>.self, capacity: (originData as! Array<Data>).count) { (ptr) in
+//                result = ptr.pointee
+//            }
+//
+//            return result as Any
         }
         else {
             var result:Self? = nil
@@ -106,9 +128,9 @@ struct Sleep:PropertyHelper {
         }
     }
     
-    public var type:Int {
+    public var type:SleepMode {
         get {
-            return self.getMemberIntValue(tuple: member_type)
+            return SleepMode(rawValue: UInt8(self.getMemberIntValue(tuple: member_type)))!
         }
     }
 }

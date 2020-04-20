@@ -288,6 +288,10 @@
 		E269E1122434D14A005BE739 /* BLEDeviceSportSleepNumProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269E1112434D14A005BE739 /* BLEDeviceSportSleepNumProtocol.swift */; };
 		E269E1142434D3BD005BE739 /* BLEDeviceSportClearProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269E1132434D3BD005BE739 /* BLEDeviceSportClearProtocol.swift */; };
 		E269E1162434D4E3005BE739 /* BLEDeviceSyncSleepProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E269E1152434D4E3005BE739 /* BLEDeviceSyncSleepProtocol.swift */; };
+		E272EEC12446DF980015C303 /* SleepDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272EEBF2446DF980015C303 /* SleepDetailVC.swift */; };
+		E272EEC22446DF980015C303 /* SleepDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E272EEC02446DF980015C303 /* SleepDetailVC.xib */; };
+		E272EEC72446E06B0015C303 /* SleepDetailTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272EEC52446E06B0015C303 /* SleepDetailTCell.swift */; };
+		E272EEC82446E06B0015C303 /* SleepDetailTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E272EEC62446E06B0015C303 /* SleepDetailTCell.xib */; };
 		E274AB032424C433007988C8 /* course.mov in Resources */ = {isa = PBXBuildFile; fileRef = E274AB022424C433007988C8 /* course.mov */; };
 		E2843FA42421F9DE00DAFB2F /* FactoryOTAResetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2843FA32421F9DE00DAFB2F /* FactoryOTAResetHelper.swift */; };
 		E28DA6432404C6EC00F0F10B /* BLESearchOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28DA6422404C6EC00F0F10B /* BLESearchOp.swift */; };
@@ -659,6 +663,10 @@
 		E269E1112434D14A005BE739 /* BLEDeviceSportSleepNumProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceSportSleepNumProtocol.swift; sourceTree = "<group>"; };
 		E269E1132434D3BD005BE739 /* BLEDeviceSportClearProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceSportClearProtocol.swift; sourceTree = "<group>"; };
 		E269E1152434D4E3005BE739 /* BLEDeviceSyncSleepProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceSyncSleepProtocol.swift; sourceTree = "<group>"; };
+		E272EEBF2446DF980015C303 /* SleepDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepDetailVC.swift; sourceTree = "<group>"; };
+		E272EEC02446DF980015C303 /* SleepDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SleepDetailVC.xib; sourceTree = "<group>"; };
+		E272EEC52446E06B0015C303 /* SleepDetailTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepDetailTCell.swift; sourceTree = "<group>"; };
+		E272EEC62446E06B0015C303 /* SleepDetailTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SleepDetailTCell.xib; sourceTree = "<group>"; };
 		E274AB022424C433007988C8 /* course.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = course.mov; sourceTree = "<group>"; };
 		E2843FA32421F9DE00DAFB2F /* FactoryOTAResetHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactoryOTAResetHelper.swift; sourceTree = "<group>"; };
 		E28DA6422404C6EC00F0F10B /* BLESearchOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESearchOp.swift; sourceTree = "<group>"; };
@@ -1163,6 +1171,7 @@
 		2B5417D52244EB7F00C9F5DD /* 常用功能 */ = {
 			isa = PBXGroup;
 			children = (
+				E272EEB72446DE650015C303 /* 睡眠详情 */,
 				2B5703232248B10D0008208E /* 运动详情 */,
 				2B5417D62244EBAA00C9F5DD /* ModifyWatchIdVC.swift */,
 				2B5417D72244EBAA00C9F5DD /* ModifyWatchIdVC.xib */,
@@ -1762,6 +1771,17 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		E272EEB72446DE650015C303 /* 睡眠详情 */ = {
+			isa = PBXGroup;
+			children = (
+				E272EEBF2446DF980015C303 /* SleepDetailVC.swift */,
+				E272EEC02446DF980015C303 /* SleepDetailVC.xib */,
+				E272EEC52446E06B0015C303 /* SleepDetailTCell.swift */,
+				E272EEC62446E06B0015C303 /* SleepDetailTCell.xib */,
+			);
+			path = "睡眠详情";
+			sourceTree = "<group>";
+		};
 		E274AAFF2424C39F007988C8 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
@@ -2048,6 +2068,7 @@
 				2B80C1FC21EC583200FE7BF7 /* OtaViewController.xib in Resources */,
 				2B56A14D21F6F0210073E2A7 /* FirmwareManagerVC.xib in Resources */,
 				2B4874A5214F763500AC5841 /* Assets.xcassets in Resources */,
+				E272EEC82446E06B0015C303 /* SleepDetailTCell.xib in Resources */,
 				2B2F8A822226C0EA0078D69F /* ToolsObjCell.xib in Resources */,
 				2B31472E2236358B0018495D /* AddDeviceCircleTestVC.xib in Resources */,
 				2B3657A721DCCF5C0070E7AB /* Icons.xcassets in Resources */,
@@ -2076,6 +2097,7 @@
 				2B3C1C41218FEB37007F7DC6 /* DeviceCell.xib in Resources */,
 				2B5417E52244EBD700C9F5DD /* SleepVC.xib in Resources */,
 				E2F45FD423CDC2DF006B34DC /* FactoryOTAExecutingVC.xib in Resources */,
+				E272EEC22446DF980015C303 /* SleepDetailVC.xib in Resources */,
 				2B707702225E1141007C5D17 /* DeviceTestVC.xib in Resources */,
 				2B80C21021EC612E00FE7BF7 /* PrefixSelectVC.xib in Resources */,
 				2B7AB99121EECE5900D01E39 /* AddDeviceTestVC.xib in Resources */,
@@ -2219,6 +2241,7 @@
 				2B44C74D21EEE32D0037F5C3 /* CmdInputLayout.swift in Sources */,
 				2B5417E42244EBD700C9F5DD /* SleepVC.swift in Sources */,
 				2BE7704421E4953100FD6374 /* OtaService.swift in Sources */,
+				E272EEC72446E06B0015C303 /* SleepDetailTCell.swift in Sources */,
 				E2ED8C8C241743E600441627 /* BLEScanGraveOp.swift in Sources */,
 				2BE7705421E4A65A00FD6374 /* FirmwareSelectCell.swift in Sources */,
 				E29160F624076DED00DE839E /* BLEFlashTestOp.swift in Sources */,
@@ -2383,6 +2406,7 @@
 				2B45441C21F5996A00FC3E91 /* ZdOtaTask.swift in Sources */,
 				E262DF3B24163C9800E1C708 /* BLEAntiHourRotationOp.swift in Sources */,
 				2B31472822362C130018495D /* StressTestingVC.swift in Sources */,
+				E272EEC12446DF980015C303 /* SleepDetailVC.swift in Sources */,
 				2B3657BC21DDB0FF0070E7AB /* SignalStrengthView.swift in Sources */,
 				2BA3B58A21FC4AFE0084E291 /* DeviceResponseLogView.swift in Sources */,
 				2B62A57021DF68720051DD38 /* Protocol.swift in Sources */,

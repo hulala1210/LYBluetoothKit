@@ -61,7 +61,15 @@ class FactoryOTAResetHelper:BaseViewController {
                 continue
             }
             
-            if d.name.hasPrefix(config.deviceNamePrefix), d.rssi >= config.signalMin {
+            var resetPrefix = ""
+            if config.blePrefixAfterOTA != nil && config.blePrefixAfterOTA!.count != 0 {
+                resetPrefix = config.blePrefixAfterOTA!
+            }
+            else {
+                resetPrefix = config.deviceNamePrefix
+            }
+            
+            if d.name.hasPrefix(resetPrefix), d.rssi >= config.signalMin {
                 hasFitOne = true
                 // 只有ota准备好之后，这个值才会变成false
                 // 在通知 otaTaskReady 处理方法里面
@@ -80,7 +88,7 @@ class FactoryOTAResetHelper:BaseViewController {
                         return
                     }
                     // 如果成功，那就进行到下一步
-                    weakSelf?.deviceConnected(device: device!)
+                    weakSelf?.deviceConnected(device: device!, acturalDevice: d)
                     
                 }, timeout: 10)
                 // 一次只连接一个
@@ -133,29 +141,32 @@ class FactoryOTAResetHelper:BaseViewController {
         return true
     }
     
-    private func deviceConnected(device: BLEDevice) {
+    //MARK: 因为升级了名字会变的蓝牙，有可能连接前和连接后的蓝牙名不一样（连接后的device的name固件可能没有及时修改过来）
+    private func deviceConnected(device: BLEDevice, acturalDevice:BLEDevice) {
         weak var weakSelf = self
         let _ = BLECenter.shared.resetDevice(boolCallback: { (success, error) in
             if !success || (error != nil) {
-                weakSelf!.unusedList.append(device)
                 self.printLog("重置设备失败")
-                weakSelf!.unusedList.append(device)
+                weakSelf!.unusedList.append(acturalDevice)
             }
             else {
                 self.printLog("重置设备成功")
-                weakSelf!.successList.append(device)
+                weakSelf!.successList.append(acturalDevice)
             }
             
-            self.printLog("断连设备")
-            let _ = BLECenter.shared.disconnect(device: device, callback: { (disconnectDevice, error) in
-                
-                if device == disconnectDevice {
-                    self.printLog("断连设备成功")
-                }
-                
-                self.printLog("5秒后继续寻找设备")
-                weakSelf?.reScan(afterSecond: 5)
-            })
+            self.printLog("2秒后继续寻找设备")
+            weakSelf?.reScan(afterSecond: 2)
+            
+//            self.printLog("断连设备")
+//            let _ = BLECenter.shared.disconnect(device: device, callback: { (disconnectDevice, error) in
+//                
+//                if device == disconnectDevice {
+//                    self.printLog("断连设备成功")
+//                }
+//                
+//                self.printLog("5秒后继续寻找设备")
+//                weakSelf?.reScan(afterSecond: 5)
+//            })
             
         }, toDeviceName: device.name)
     }

@@ -33,7 +33,13 @@ class FTPHelper {
 //        return true
         
         if URLString.count > 0 {
-            return NSPredicate.init(format: "SELF MATCHES %@", "^[Ff][Tt][Pp]://(\\w*(:[=_0-9a-zA-Z\\$\\(\\)\\*\\+\\-\\.\\[\\]\\?\\\\\\^\\{\\}\\|`~!#%&\'\",<>/]*)?@)?([0-9a-zA-Z\\-\\.]+\\.)+[0-9a-zA-Z\\.]+(:(6553[0-5]|655[0-2]\\d|654\\d\\d|64\\d\\d\\d|[0-5]?\\d?\\d?\\d?\\d))?(/?|((/[=_0-9a-zA-Z\\-%\\.]+)+(/|\\.[_0-9a-zA-Z\\.]+)?))$").evaluate(with: URLString)
+            
+            let regx = "(https?|ftp|file)://[-A-Za-z0-9\u{4e00}-\u{9fa5}\u{3002}\u{ff1b}\u{ff0c}\u{ff1a}\u{201c}\u{201d}\u{ff08}\u{ff09}\u{3001}\u{ff1f}\u{300a}\u{300b}+&@#/%?=~_|!:,.;]+[-A-Za-z0-9\u{4e00}-\u{9fa5}\u{3002}\u{ff1b}\u{ff0c}\u{ff1a}\u{201c}\u{201d}\u{ff08}\u{ff09}\u{3001}\u{ff1f}\u{300a}\u{300b}+&@#/%=~_|]"
+            
+//            return NSPredicate.init(format: "SELF MATCHES %@", "^[Ff][Tt][Pp]://(\\w*(:[=_a-zA-Z0-9\u4e00-\u9fa5\\$\\(\\)\\*\\+\\-\\.\\[\\]\\?\\\\\\^\\{\\}\\|`~!#%&\'\",<>/]*)?@)?([0-9a-zA-Z\\-\\.]+\\.)+[0-9a-zA-Z\\.]+(:(6553[0-5]|655[0-2]\\d|654\\d\\d|64\\d\\d\\d|[0-5]?\\d?\\d?\\d?\\d))?(/?|((/[=_0-9a-zA-Z\\-%\\.]+)+(/|\\.[_0-9a-zA-Z\\.]+)?))$").evaluate(with: URLString)
+            
+            return NSPredicate.init(format: "SELF MATCHES %@", regx).evaluate(with: URLString)
+            
         }
         
         return false
